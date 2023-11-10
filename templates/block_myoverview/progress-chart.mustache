@@ -1,0 +1,31 @@
+{{!
+    @template block_myoverview/progress-chart
+
+    This template renders a doughnut chart to show course progress.
+
+    Example context (json):
+    {
+        "hasprogress": true,
+        "progress": "60"
+    }
+}}
+<div class="progress-chart-container m-b-1 m-r-1 {{#progresschartvisible}}show-progress-chart{{/progresschartvisible}}">
+    {{#hasprogress}}
+    <div class="progress-doughnut">
+        <div class="progress-text {{#progress}}has-percent{{/progress}}">{{progress}}&#37;</div>
+        <div class="progress-indicator">
+            <svg viewbox="0 0 36 36" class="circular-chart">
+                <path class="progress-circle" stroke-dasharray="{{progress}}, 100" d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                </path>
+            </svg>
+        </div>
+    </div>
+    {{/hasprogress}}
+    {{^hasprogress}}
+    <div class="no-progress">
+        {{# pix }} i/course, core {{/ pix }}
+    </div>
+    {{/hasprogress}}
+</div>

@@ -1,0 +1,20 @@
+<div id="lp_carousel" class="carousel slide {{#slideeffect}}carousel-fade{{/slideeffect}}"
+  data-ride="carousel" data-interval="{{#hasslidetime}}{{slidetime}}{{/hasslidetime}}{{^hasslidetime}}5000{{/hasslidetime}}">
+  <div class="carousel-inner">
+    {{#hasslides}}
+      {{#slides}}
+        {{#first}}
+          <div class="carousel-item item active" style="background-image: url({{url}});"></div>
+        {{/first}}
+        {{^first}}
+          <div class="carousel-item item" style="background-image: url({{url}});"></div>
+        {{/first}}
+      {{/slides}}
+    {{/hasslides}}
+  </div>
+</div>
+{{#js}}
+require(['jquery', 'theme_boost/loader'], function($) {
+    $('#lp_carousel').carousel();
+});
+{{/js}}

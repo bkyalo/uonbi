@@ -1,0 +1,121 @@
+<footer id="page-footer" data-region="mainpage" class="bg-inverse">
+    <div class="container-fluid">
+        <div class="footer-lists row">
+            {{# footerlinks1 }}
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                {{# footerlinksheading1}}<h4 class="title">{{footerlinksheading1}}</h4>{{/ footerlinksheading1}}
+                <div class="list">{{{footerlinks1}}}</div>
+            </div>
+            {{/ footerlinks1 }}
+
+            {{# footerlinks2 }}
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                {{# footerlinksheading2}}<h4 class="title">{{footerlinksheading2}}</h4>{{/ footerlinksheading2}}
+                <div class="list">{{{footerlinks2}}}</div>
+            </div>
+            {{/ footerlinks2 }}
+
+            {{# footerlinks3 }}
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                {{# footerlinksheading3}}<h4 class="title">{{footerlinksheading3}}</h4>{{/ footerlinksheading3}}
+                <div class="list">{{{footerlinks3}}}</div>
+            </div>
+            {{/ footerlinks3 }}
+
+            {{# footerlinks4 }}
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                {{# footerlinksheading4}}<h4 class="title">{{footerlinksheading4}}</h4>{{/ footerlinksheading4}}
+                <div class="list">{{{footerlinks4}}}</div>
+            </div>
+            {{/ footerlinks4 }}
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-7">
+                {{# footnote }}
+                    {{{footnote}}}
+                {{/ footnote }}
+                {{# contacts }}
+                    <div class="contact-info">
+                         <p>{{# address}}{{address}}{{/ address}}<br>
+                        {{# phoneno}}
+                          <i class="fa fa-phone-square"></i> {{phone}} : {{phoneno}}<br>
+                        {{/ phoneno}}
+                        {{# emailid}}
+                          <i class="fa fa-envelope"></i> {{email}} : <a class="mail-link" href="mailto:{{emailid}}">{{emailid}}</a><br>
+                        {{/ emailid}}
+                        </p>
+                    </div>
+                {{/ contacts }}
+                {{{ output.standard_footer_html }}}
+
+                {{# output.page_doc_link }}
+                    <div class="moodlehelp">{{{ output.page_doc_link }}}</div>
+                {{/ output.page_doc_link }}
+
+            </div>
+            <div class="col-md-12 col-lg-5">
+                <div class="copyright mb-3">
+                    {{{copyright}}}
+                </div>
+
+                {{# social }}
+                <div class="social-media float-right">
+                    <ul>
+                     {{# fburl}}
+                        <li class="sm-01"><a href="{{fburl}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    {{/ fburl}}
+                    {{# twurl}}
+                        <li class="sm-02">
+                            <a href="{{twurl}}" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16">
+                                    <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
+                                </svg>
+                            </a>
+                        </li>
+                    {{/ twurl}}
+                    {{# instaurl}}
+                        <li class="sm-03"><a href="{{instaurl}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                    {{/ instaurl}}
+                    {{# linkedinurl}}
+                       <li class="sm-04"><a href="{{linkedinurl}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                    {{/ linkedinurl}}
+                    {{# pinurl}}
+                       <li class="sm-05"><a href="{{pinurl}}" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+                    {{/ pinurl}}
+                    {{# youtubeurl}}
+                        <li class="sm-07"><a href="{{youtubeurl}}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                    {{/ youtubeurl}}
+                    </ul>
+                </div>
+                {{/ social }}
+            </div>
+        </div>
+
+        <div class="tool_usertours-resettourcontainer text-center"></div>
+            {{{output.standard_end_of_body_html}}}
+        </div>
+
+
+        <div class="footer-content-debugging my-3">
+            <div class="container-fluid">
+                {{{ output.debug_footer_html }}}
+            </div>
+        </div>
+
+        <a onclick="('{{scrollTop}}')" id="topbutton" class="back-to-top" title="Go to top"><i class="fa fa-chevron-up "></i></a>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="loadingmodal" tabindex="-1" role="dialog" aria-labelledby="loadingmodallabel" aria-hidden="true" data-waiting="{{enablewaiting}}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3>{{# str }} fetching, theme_uonbi {{/ str }}</h3>
+                <div class="waitloader"></div>
+            </div>
+        </div>
+    </div>
+</div>

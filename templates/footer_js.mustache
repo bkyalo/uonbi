@@ -1,0 +1,35 @@
+{{#js}}
+require(['theme_boost/loader']);
+require(['theme_boost/drawer'], function(mod) {
+    mod.init();
+});
+
+require(['theme_uonbi/waiting'], function(Waiting) {
+    Waiting.init();
+});
+
+require(['theme_uonbi/metismenu', 'jquery'], function(metisMenu, $) {
+    $(".metismenu").metisMenu();
+});
+
+$(document).ready(function(){
+    $("#topbutton").hide();
+    $(function (scrollTop) {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#topbutton').fadeIn();
+            } else {
+                $('#topbutton').fadeOut();
+            }
+        });
+
+        $('#topbutton').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+});
+
+{{/js}}

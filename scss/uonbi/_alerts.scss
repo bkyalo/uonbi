@@ -1,0 +1,60 @@
+.alert {
+  a {
+    font-weight: 500;
+    color: inherit;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &.hiddencourse {
+    margin-bottom: 0;
+    #page-course-info & {
+      max-width: $xl;
+      margin: 0 auto;
+    }
+  }
+}
+.useralerts {
+    width: 100%;
+    margin: 0 auto 1rem;
+
+    .alertmessage {
+        display: flex;
+        align-items: center;
+        line-height: 1.4;
+        margin-right: ($spacer * 2);
+        .fa {
+            font-size: 2em;
+            text-align: center;
+            margin-right: ($spacer * 2);
+        }
+        .alerttext {
+            font-size: 15px;
+            .title {
+                display: block;
+                font-size: 16px;
+                font-weight: 600;
+                margin-right: 5px;
+                margin-bottom: 2px;
+            }
+        }
+    }
+    .close {
+        font-size: $font-size-base;
+    }
+    .pagelayout-frontpage & {
+      margin: ($spacer * 1.5) auto 0;
+    }
+    .pagelayout-login & {
+      max-width: calc(100% - 30px);
+      
+      @media (min-width: $md) {
+        max-width: calc(100% - 60px);
+      }
+      @media (min-width: $max-page-width) {
+        max-width: calc(80% - 60px);
+      }
+    }
+}

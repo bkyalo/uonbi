@@ -1,0 +1,47 @@
+@function set-footer-text-color($color){
+  @if (lightness($color) > 49) {
+    @return $font-color; // Lighter background, return dark color
+  } @else {
+    @return $white; // Darker background, return light color
+  }
+}
+
+@function set-footer-logo-color($color) {
+  @if (lightness($color) > 49) {
+    @return $logo-dark; // Lighter background, return dark color
+  } @else {
+    @return $logo-light; // Darker background, return light color
+  }
+}
+
+@function set-primary-text-color($color){
+  @if (lightness($color) > 49) {
+    @return $font-color; // Lighter background, return dark color
+  } @else {
+    @return $white; // Darker background, return light color
+  }
+}
+
+@function set-icon-image-color($color){
+  @if (lightness($color) > 49) {
+    @return $icon-dark; // Lighter background, return dark color
+  } @else {
+    @return $icon-light; // Darker background, return light color
+  }
+}
+
+@function set-header-border-color($color) {
+  @if (lightness($color) > 49) {
+    @return rgba(0,0,0,0.2); // Lighter background, return dark color
+  } @else {
+    @return rgba(255,255,255,0.25); // Darker background, return light color
+  }
+}
+
+@function set-nav-transparent-color($color) {
+  @if (lightness($color) > 50) {
+    @return darken($color, 10%); // Lighter background, return dark color
+  } @else {
+    @return rgba(255,255,255,0.2); // Darker background, return light color
+  }
+}

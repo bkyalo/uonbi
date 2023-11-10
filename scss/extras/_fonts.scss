@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    src: url([[font:theme|poppins-regular.woff]]) format('woff'),
+         url([[font:theme|poppins-regular.woff2]]) format('woff2'),
+         url([[font:theme|poppins-regular.ttf]]) format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: normal;
+    src: url([[font:theme|poppins-italic.woff]]) format('woff'),
+         url([[font:theme|poppins-italic.woff2]]) format('woff2'),
+         url([[font:theme|poppins-italic.ttf]]) format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: bold;
+    src: url([[font:theme|poppins-semibold.woff]]) format('woff'),
+         url([[font:theme|poppins-semibold.woff2]]) format('woff2'),
+         url([[font:theme|poppins-semibold.ttf]]) format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: bold;
+    src: url([[font:theme|poppins-semibolditalic.woff]]) format('woff'),
+         url([[font:theme|poppins-semibolditalic.woff2]]) format('woff2'),
+         url([[font:theme|poppins-semibolditalic.ttf]]) format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 800;
+    src: url([[font:theme|poppins-extrabold.woff]]) format('woff'),
+         url([[font:theme|poppins-extrabold.woff2]]) format('woff2'),
+         url([[font:theme|poppins-extrabold.ttf]]) format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 800;
+    src: url([[font:theme|poppins-extrabolditalic.woff]]) format('woff'),
+         url([[font:theme|poppins-extrabolditalic.woff2]]) format('woff2'),
+         url([[font:theme|poppins-extrabolditalic.ttf]]) format('truetype');
+}
+@font-face {
+    font-family: "simple-line-icons";
+    src: url('[[setting:fontwww]]Simple-Line-Icons.eot');
+    src: url('[[setting:fontwww]]Simple-Line-Icons.eot?#iefix') format('embedded-opentype'),
+         url('[[setting:fontwww]]Simple-Line-Icons.woff2') format('woff2'),
+         url('[[setting:fontwww]]Simple-Line-Icons.woff') format('woff'),
+         url('[[setting:fontwww]]Simple-Line-Icons.ttf') format('truetype'),
+         url('[[setting:fontwww]]Simple-Line-Icons.svg#simple-line-icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

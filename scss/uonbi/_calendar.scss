@@ -1,0 +1,40 @@
+.path-calendar,
+.block_calendar_month {
+    .maincalendar,
+    .minicalendar {
+        .calendar-controls {
+            .arrow_link {
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+                margin-bottom: $spacer;
+
+                &:before {
+                    display: inline-block;
+                    font-family: "FontAwesome";
+                    font-size: $h5-font-size;
+                    content: "\f104";
+                }
+                &.next {
+                    justify-content: flex-end;
+                    &:before {
+                        order: 2;
+                        content: "\f105";
+                    }
+                }
+                .arrow {
+                    display: none;
+                }
+            }
+        }
+    }
+    #region-main {
+        @media (max-width: $sm) {
+            .calendar-controls {
+                .arrow_text {
+                    display: none;
+                }
+            }
+        }
+    }
+}

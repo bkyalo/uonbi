@@ -1,0 +1,44 @@
+.secondary-navigation {
+    max-width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    margin: 0 auto 0;
+    padding: 0;
+
+    .notloggedin & {
+        display: none;
+    }
+    .format-tiles-tile-open & {
+        position: unset;
+    }
+
+    .navigation {
+        padding: 0;
+        margin: 0 auto;
+        background: $white;
+        .nav-tabs {
+            max-width: 100% !important;
+            background: transparent;
+            .nav-item {
+                background: transparent;
+                .nav-link {
+                    &:hover {
+                        cursor: pointer;
+                        border-bottom-color: $primary;
+                        background: $gray-lightest;
+                    }
+                    &.active {
+                        border-bottom-color: $link-color;
+                    }
+                }
+                .nav-item {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+    #page-course-info & {
+        max-width: $xl;
+    }
+}
