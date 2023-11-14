@@ -73,6 +73,18 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Renders the "breadcrumb" for all pages in boost union.
+     *
+     * This renderer function is copied and modified from /theme/boost/classes/output/core_renderer.php
+     *
+     * @return string the HTML for the navbar.
+     */
+    public function navbar(): string {
+        $newnav = new \theme_uonbi\boostnavbar($this->page);
+        return $this->render_from_template('core/navbar', $newnav);
+    }
+
+    /**
      * Return University of Nairobi editing button.
      * @return string
      */
@@ -127,26 +139,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
         return $uppercontent;
     }
-
-    // /**
-    //  * Renders the login form.
-    //  *
-    //  * @param \core_auth\output\login $form The renderable.
-    //  * @return string
-    //  */
-    // public function render_login(\core_auth\output\login $form) {
-    //     global $SITE;
-
-    //     $context = $form->export_for_template($this);
-
-    //     // Override because rendering is not supported in template yet.
-    //     $context->cookieshelpiconformatted = $this->help_icon('cookiesenabled');
-    //     $context->errorformatted = $this->error_text($context->error);
-
-    //     $context->sitename = format_string($SITE->fullname, true, array('context' => \context_course::instance(SITEID)));
-
-    //     return $this->render_from_template('core/login', $context);
-    // }
 
     /**
      * Override core arrows for activity navigation only.

@@ -371,6 +371,38 @@ small, .small {
         background-color: $danger;
     }
 }
+.jumbotron {
+    &-default {
+        color: set-primary-text-color($secondary);
+        background-color: $secondary;
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: set-primary-text-color($primary);
+            margin-bottom: 2rem;
+        }
+        p {
+            font-size: 110%;
+            display: flex;
+            .fa-check {
+                font-size: 120%;
+                margin-right: 20px;
+            }
+        }
+    }
+    &-warning {
+        color: $font-color;
+        background-color: $warning;
+    }
+    &-success {
+        background-color: $success;
+    }
+    &-info {
+        background-color: $link-color;
+    }
+    &-danger {
+        background-color: $danger;
+    }
+}
 .cell .singlebutton {
     margin-left: 3px;
     margin-right: 3px;
@@ -477,7 +509,7 @@ small, .small {
                 @media (min-width: $md) {
                     padding-right: $spacer;
                 }
-                @media (min-width: $max-page-width) {
+                @media (max-width: $xxl) {
                     padding-left: ($spacer * 4);
                 }
             }
@@ -801,7 +833,14 @@ small, .small {
                 border: none;
 
                 .breadcrumb-item {
+                    display: flex;
+                    align-items: center;
                     padding: 0 ($spacer / 2) $spacer 0;
+
+                    &::before {
+                        font-size: 80%;
+                        color: $link-color;
+                    }
 
                     @media (max-width: ($md - 1)) {
                         display: none;
@@ -814,9 +853,6 @@ small, .small {
                         color: set-primary-text-color($body-bg);
                     }
                 }
-            }
-            .pagelayout-course & {
-                display: none;
             }
         }
 
@@ -837,7 +873,7 @@ small, .small {
         }
 
         .header-actions-container {
-            margin-top: $spacer;
+            margin-top: 0;
 
             .simplesearchform {
                 min-width: 15rem;
@@ -855,12 +891,8 @@ small, .small {
         }
 
         .page-context-header {
-            margin-top: $spacer;
             .uses-drawers & {
                 padding: 0;
-            }
-            .pagelayout-mydashboard & {
-                margin-top: 0;
             }
         }
 
@@ -1935,11 +1967,6 @@ table {
     }
 
     @media (max-width: ($md - 1)) {
-        transform: scale(0.9);
-        bottom: $spacer * 7;
-
-        &:hover {
-            transform: scale(1);
-        }
+        display: none !important;
     }
 }

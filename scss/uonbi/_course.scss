@@ -119,7 +119,7 @@
                 h1.coursename {
                     display: table-cell;
                     font-size: $h3-font-size;
-                    font-weight: 800;
+                    font-weight: 300;
                     line-height: 1.30 3rem;
                     margin: auto 0;
                     padding-bottom: 0;
@@ -276,6 +276,8 @@
                 .course-summary-short-summary {
                     font-size: 130%;
                     color: set-primary-text-color($primary);
+                    text-transform: none;
+
 
                     @media screen and (max-width: ($lg - 1)) {
                         font-size: 115%;
@@ -910,17 +912,6 @@
             }
         }
     }
-    #page-footer {
-        &::before {
-            content: "";
-            width: $max-page-width;
-            max-width: 100%;
-            display: block;
-            height: 1px;
-            margin: 0 auto 1rem;
-            border-top: 1px solid $gray-light;
-        }
-    }
 }
 
 .arrow.sep,
@@ -977,6 +968,17 @@
                     text-decoration: none;
                 }
             }
+        }
+    }
+}
+
+#page-course-info,
+.pagelayout-course,
+.pagelayout-incourse {
+    .drawer-right {
+        background: $gray-lighter;
+        .block {
+            background: transparent;
         }
     }
 }

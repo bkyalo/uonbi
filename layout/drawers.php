@@ -196,6 +196,7 @@ $templatecontext = [
     'copyright' => $copyright,
     'social' => $social,
     'contacts' => $contacts,
+
     'bodyattributes' => $bodyattributes,
     'courseindex' => $courseindex,
     'courseindexopen' => $courseindexopen,

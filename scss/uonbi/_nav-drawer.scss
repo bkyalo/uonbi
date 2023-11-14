@@ -205,8 +205,9 @@
                 border-top: none;
             }
         }
+        #page-course-edit &,
         .pagelayout-course &,
-        .pagelayout-incourse & {
+        .pagelayout-incourse:not(#page-course-info) & {
             &[aria-label="Site"] {
                 position: relative;
                 border-top: 1px solid set-header-border-color($nav-drawer-bg);
