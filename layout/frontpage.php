@@ -148,12 +148,6 @@ if (!empty($theme->settings->hamburgerpos)) {
     $templatecontext['hamburgerpos'] = true;
 }
 
-$loginbtn = theme_uonbi_get_setting('loginbtn');
-$loginbtnshow = $loginbtn == 2;
-if (!empty($loginbtnshow) && !isloggedin()) {
-    $templatecontext['loginbtn'] = true;
-}
-
 // Improve boost navigation.
 $nav = theme_uonbi\nav\flat_navigation::get_flat_nav($PAGE);
 $nav->initialise();

@@ -48,26 +48,32 @@
 }}
 {{> theme_uonbi/head }}
 
-<body {{{ bodyattributes }}} {{#frontbgurl}}style="background-image: url({{frontbgurl}});"{{/frontbgurl}}>
+<body {{{ bodyattributes }}} >
 
 {{{ output.standard_top_of_body_html }}}
 
 {{>theme_uonbi/navbar}}
 
 <div id="page-wrapper">
+    {{#haspagetopblocks}}
+        <section id="region-page-top" class="{{#haspagetopblocks}}has-blocks mb-3 {{/haspagetopblocks}}" aria-label="{{#str}}blocks{{/str}}"
+            {{#frontbgurl}}style="background-image: url({{frontbgurl}});"{{/frontbgurl}}>
+            <span class="dragblocks label label-default">{{#str}}dragblocks, theme_uonbi{{/str}}</span>
+            {{{ pagetopblocks }}}
+        </section>
+    {{/haspagetopblocks}}
+    {{{ output.useralert }}}
+
     <div id="page" class="container-fluid">
-        {{{ output.useralert }}}
         {{{ output.full_header }}}
-
         <div id="page-content" class="row pb-3">
+            {{#haspagebtmblocks}}
+                <section id="region-page-btm" class="col-12 {{#haspagebtmblocks}}has-blocks mb-3 {{/haspagebtmblocks}}" aria-label="{{#str}}blocks{{/str}}">
+                    <span class="dragblocks label label-default">{{#str}}dragblocks, theme_uonbi{{/str}}</span>
+                    {{{ pagebtmblocks }}}
+                </section>
+            {{/haspagebtmblocks}}
             <div id="region-main-box" class="col-12">
-                {{#haspagetopblocks}}
-                    <section id="region-page-top" class="{{#haspagetopblocks}}has-blocks mb-3 {{/haspagetopblocks}}" aria-label="{{#str}}blocks{{/str}}">
-                        <span class="dragblocks label label-default">{{#str}}dragblocks, theme_uonbi{{/str}}</span>
-                        {{{ pagetopblocks }}}
-                    </section>
-                {{/haspagetopblocks}}
-
                 <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}} aria-label="{{#str}}content{{/str}}">
                     {{#hasregionmainsettingsmenu}}
                         <div class="region_main_settings_menu_proxy"></div>
@@ -84,13 +90,6 @@
                 </section>
                 {{/hasblocks}}
             </div>
-
-            {{#haspagebtmblocks}}
-            <section id="region-page-btm" class="col-12 {{#haspagebtmblocks}}has-blocks mb-3 {{/haspagebtmblocks}}" aria-label="{{#str}}blocks{{/str}}">
-                <span class="dragblocks label label-default">{{#str}}dragblocks, theme_uonbi{{/str}}</span>
-                {{{ pagebtmblocks }}}
-            </section>
-            {{/haspagebtmblocks}}
         </div>
     </div>
     {{{ output.standard_after_main_region_html }}}

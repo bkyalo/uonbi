@@ -388,17 +388,6 @@ if (is_siteadmin()) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $temp->add($setting);
 
-    // Hide/show login button in header.
-    $name = 'theme_uonbi/loginbtn';
-    $title = get_string('loginbtn', 'theme_uonbi');
-    $description = get_string('loginbtn_desc', 'theme_uonbi');
-    $options = [];
-    $options[1] = get_string('show', 'theme_uonbi');
-    $options[2] = get_string('hide', 'theme_uonbi');
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $options);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);
-
     // Header background colour.
     $name = 'theme_uonbi/headerbgcolor';
     $title = get_string('headerbgcolor', 'theme_uonbi');
@@ -497,17 +486,6 @@ if (is_siteadmin()) {
 
     // Course temp Settings
     $temp = new admin_settingpage('theme_uonbi_coursepage', get_string('coursepageheading', 'theme_uonbi'));
-
-    // Section-0 heading hide/show option.
-    $name = 'theme_uonbi/sectionzero';
-    $title = get_string('sectionzero', 'theme_uonbi');
-    $description = get_string('sectionzerodesc', 'theme_uonbi');
-    $options = [];
-    $options[1] = get_string('show', 'theme_uonbi');
-    $options[2] = get_string('hide', 'theme_uonbi');
-    $setting = new admin_setting_configselect($name, $title, $description, $default, $options);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $temp->add($setting);
 
     // Show hidden course alert in course pages.
     $name = 'theme_uonbi/hiddencoursealert';

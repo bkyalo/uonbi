@@ -62,9 +62,47 @@ body {
     }
 
     // Assignment grader needs margin-top set to 0
-    &.pagelayout-embedded {
+    &.pagelayout-embedded,
+    &.pagelayout-frontpage {
         #page {
             margin-top: 0 !important;
+        }
+    }
+    &.pagelayout-frontpage {
+        background: $white !important;
+        #page-wrapper {
+            margin-top: calc(#{$navbar-height} + #{$navbar-border-height}) !important;
+        }
+        #region-page-top {
+            min-height: 80vh;
+            background-size: cover;
+            background-attachment: fixed;
+            #block-region-page-top {
+                display: flex;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0,0,0,0.5);
+                .block {
+                    background: transparent;
+                    .content {
+                        h1, h2, h3, h4, h5, h6, p {
+                            font-weight: 800;
+                            color: $white;
+                        }
+                        h1 {
+                            font-size: 60px;
+                        }
+                    }
+                }
+            }
+        }
+        hr {
+            background-image: -webkit-linear-gradient(left,transparent,#CCCCCC,transparent);
+            background-image: linear-gradient(to right,transparent,#CCCCCC,transparent);
+            height: 1px;
+            border: 0;
+            box-sizing: content-box;
         }
     }
 
@@ -134,13 +172,13 @@ body {
         }
     }
 
-    h1, .h1 {
+    h1, .h1, h2, .h2 {
         font-family: $headings-font-family;
-        font-weight: 800;
+        font-weight: 300;
     }
 
-    h2, h3, h4, h5, h6,
-    .h2, .h3, .h4, .h5, .h6 {
+    h3, h4, h5, h6,
+    .h3, .h4, .h5, .h6 {
         font-weight: 400;
         line-height: 1;
     }
@@ -370,6 +408,41 @@ small, .small {
     &.label-danger {
         background-color: $danger;
     }
+    .pagelayout-frontpage & {
+        font-size: inherit;
+    }
+}
+.jumbotron {
+    &-default {
+        color: set-primary-text-color($secondary);
+        background-color: $secondary;
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: set-primary-text-color($primary);
+            margin-bottom: 2rem;
+        }
+        p {
+            font-size: 110%;
+            display: flex;
+            .fa-check {
+                font-size: 120%;
+                margin-right: 20px;
+            }
+        }
+    }
+    &-warning {
+        color: $font-color;
+        background-color: $warning;
+    }
+    &-success {
+        background-color: $success;
+    }
+    &-info {
+        background-color: $link-color;
+    }
+    &-danger {
+        background-color: $danger;
+    }
 }
 .jumbotron {
     &-default {
@@ -407,20 +480,25 @@ small, .small {
     margin-left: 3px;
     margin-right: 3px;
 }
-.form-inline[data-region="filtercompetencies"] {
-    .form-group {
-        button {
-            img[title="Search"].icon {
-                display: none
-            }
-            &:after {
-                font-family: "FontAwesome";
-                font-size: 102%;
-                content: "\f002";
-                display: block;
-                color: $white;
+.form-inline {
+    &[data-region="filtercompetencies"] {
+        .form-group {
+            button {
+                img[title="Search"].icon {
+                    display: none
+                }
+                &:after {
+                    font-family: "FontAwesome";
+                    font-size: 102%;
+                    content: "\f002";
+                    display: block;
+                    color: $white;
+                }
             }
         }
+    }
+    label {
+        display: inline;
     }
 }
 @media screen and (min-width: $sm) {
@@ -473,7 +551,6 @@ small, .small {
         padding-left: $spacer;
         padding-right: $spacer;
     }
-
     &.drawers {
         max-width: inherit;
         padding-bottom: 0;
@@ -661,7 +738,7 @@ small, .small {
             z-index: 100;
 
             h2 {
-                font-weight: 800;
+                font-weight: 300;
             }
         }
         #page-content {
@@ -1929,6 +2006,44 @@ table {
 .mod_quiz-edit-top-controls {
     #inputmaxgrade {
         min-width: 100px;
+    }
+}
+
+.featured-boxes {
+    max-width: 100%;
+    padding: 1rem 0;
+    overflow: hidden;
+    .row {
+        margin: 0;
+        div[class*='col-'],
+        div[class^='col-'] {
+            margin-bottom: 1rem;
+        }
+    }
+    .featured-box {
+        height: 100%;
+        padding: 2rem 1rem 1rem;
+        
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+    }
+    &.container {
+        max-width: $xl;
+        .featured-box {
+            padding: 0 1rem;
+            box-shadow: none;
+            h1, h2 {
+                margin-bottom: 1rem;
+            }
+            .lead {
+                color: lighten($font-color, 25%);
+                line-height: 1.5;
+            }
+        }
     }
 }
 

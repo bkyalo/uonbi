@@ -526,13 +526,20 @@
                                                 font-size: $h5-font-size;
                                                 color: $white;
                                                 content: "\f105";
-                                                margin-left: 3px;
+                                                margin-left: 2px;
+                                                margin-top: -1px;
                                             }
                                         }
                                     }
                                     .instancename {
                                         font-size: $font-size-base;
                                     }
+                                    .text-uppercase.small {
+                                        display: none;
+                                    }
+                                }
+                                .description .course-description-item {
+                                    margin-top: 0;
                                 }
                             }
                         }
@@ -904,12 +911,26 @@
             }
         }
     }
+    #theme_boost-drawers-blocks {
+        background: $gray-lightest;
+        box-shadow:none;
+        .block {
+            background: transparent;
+        }
+    }
+}
 
-    &.sectionzero-heading {
-        #section-0 {
-            .sectionname {
-                display: none;
-            }
+.pagelayout-course,
+.pagelayout-incourse {
+    #page-footer {
+        &::before {
+            content: "";
+            width: $max-page-width;
+            max-width: 100%;
+            display: block;
+            height: 1px;
+            margin: 0 auto 1rem;
+            border-top: 1px solid darken($gray-border, 5%);
         }
     }
 }
