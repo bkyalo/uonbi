@@ -83,11 +83,6 @@ if (!$hasblocks) {
     $blockdraweropen = false;
 }
 
-$sectionzero = theme_uonbi_get_setting('sectionzero');
-if ($sectionzero == 2) {
-    $extraclasses[] = 'sectionzero-heading';
-}
-
 $courseindex = core_course_drawer();
 if (!$courseindex) {
     $courseindexopen = false;
@@ -232,12 +227,6 @@ if (!empty($theme->settings->hamburgerpos)) {
 $templatecontext['hiddencoursealert'] = true;
 if (!empty($theme->settings->hiddencoursealert)) {
     $templatecontext['hiddencoursealert'] = false;
-}
-
-$loginbtn = theme_uonbi_get_setting('loginbtn');
-$loginbtnshow = $loginbtn == 2;
-if (!empty($loginbtnshow) && !isloggedin()) {
-    $templatecontext['loginbtn'] = true;
 }
 
 // Improve boost navigation.

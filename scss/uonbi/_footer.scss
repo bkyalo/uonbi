@@ -185,22 +185,13 @@
                     color: set-footer-text-color($footer-bg);
                     text-align: center;
                     height: ($spacer * 2.7);
-                    width: ($spacer * 2.7);
+                    width: ($spacer * 1.7);
                     line-height: ($spacer * 2.5);
-                    border: 2px solid $gray-border;
                     border-radius: 50%;
                     transition: 0.2s;
 
-                    &:focus,
-                    &:hover {
-                        color: $footer-bg;
-                        text-decoration: none;
-                        background-color: set-footer-text-color($footer-bg);
-                        border-color: set-footer-text-color($footer-bg);
-                        box-shadow: 0 4px 4px rgba(0,0,0,0.25);
-                        svg {
-                            filter: brightness(0) invert(1);
-                        }
+                    svg {
+                        filter: set-footer-logo-color($footer-bg);
                     }
                 }
             }

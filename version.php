@@ -24,9 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2022110409;
-$plugin->requires  = 2022041900;
+$plugin->version   = 2023092900;
+$plugin->requires  = 2022111800;
 $plugin->component = 'theme_uonbi';
 $plugin->dependencies = array(
-    'theme_boost'  => 2022041900,
+    'theme_boost'  => 2022112800
 );

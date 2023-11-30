@@ -125,10 +125,4 @@ if (!empty($theme->settings->hamburgerpos)) {
     $templatecontext['hamburgerpos'] = true;
 }
 
-$loginbtn = theme_uonbi_get_setting('loginbtn');
-$loginbtnshow = $loginbtn == 2;
-if (!empty($loginbtnshow) && !isloggedin()) {
-    $templatecontext['loginbtn'] = true;
-}
-
 echo $OUTPUT->render_from_template('theme_uonbi/login', $templatecontext);
