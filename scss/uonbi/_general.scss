@@ -738,7 +738,10 @@ small, .small {
             z-index: 100;
 
             h2 {
+                font-size: $h1-font-size;
                 font-weight: 300;
+                margin-top: 0 !important;
+                margin-bottom: 1.5rem !important;
             }
         }
         #page-content {
@@ -2011,14 +2014,10 @@ table {
 
 .featured-boxes {
     max-width: 100%;
-    padding: 1rem 0;
+    padding: .3rem 0 2rem;
     overflow: hidden;
     .row {
         margin: 0;
-        div[class*='col-'],
-        div[class^='col-'] {
-            margin-bottom: 1rem;
-        }
     }
     .featured-box {
         height: 100%;
@@ -2028,7 +2027,7 @@ table {
         h2 {
             font-size: 1.6rem;
             font-weight: 400;
-            margin-bottom: 0;
+            margin-bottom: 1rem;
         }
     }
     &.container {

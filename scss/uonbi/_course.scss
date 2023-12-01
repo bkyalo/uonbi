@@ -921,7 +921,8 @@
 }
 
 .pagelayout-course,
-.pagelayout-incourse {
+.pagelayout-incourse,
+.pagelayout-frontpage {
     #page-footer {
         &::before {
             content: "";

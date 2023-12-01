@@ -62,17 +62,11 @@
             {{{ pagetopblocks }}}
         </section>
     {{/haspagetopblocks}}
-    {{{ output.useralert }}}
 
     <div id="page" class="container-fluid">
+        {{{ output.useralert }}}
         {{{ output.full_header }}}
         <div id="page-content" class="row pb-3">
-            {{#haspagebtmblocks}}
-                <section id="region-page-btm" class="col-12 {{#haspagebtmblocks}}has-blocks mb-3 {{/haspagebtmblocks}}" aria-label="{{#str}}blocks{{/str}}">
-                    <span class="dragblocks label label-default">{{#str}}dragblocks, theme_uonbi{{/str}}</span>
-                    {{{ pagebtmblocks }}}
-                </section>
-            {{/haspagebtmblocks}}
             <div id="region-main-box" class="col-12">
                 <section id="region-main" {{#hasblocks}}class="has-blocks mb-3"{{/hasblocks}} aria-label="{{#str}}content{{/str}}">
                     {{#hasregionmainsettingsmenu}}
@@ -90,6 +84,12 @@
                 </section>
                 {{/hasblocks}}
             </div>
+            {{#haspagebtmblocks}}
+                <section id="region-page-btm" class="col-12 {{#haspagebtmblocks}}has-blocks mb-3 {{/haspagebtmblocks}}" aria-label="{{#str}}blocks{{/str}}">
+                    <span class="dragblocks label label-default">{{#str}}dragblocks, theme_uonbi{{/str}}</span>
+                    {{{ pagebtmblocks }}}
+                </section>
+            {{/haspagebtmblocks}}
         </div>
     </div>
     {{{ output.standard_after_main_region_html }}}
