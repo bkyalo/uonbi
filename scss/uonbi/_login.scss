@@ -66,6 +66,15 @@
     section.edge--bottom {
         display: none;
     }
+    #useralerts-container {
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+        .alert {
+            max-width: calc(100% - 4px);
+            margin: 0 auto;
+        }
+    }   
 }
 
 
