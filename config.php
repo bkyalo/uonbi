@@ -46,7 +46,6 @@ $THEME->extrascsscallback = 'theme_uonbi_get_extra_scss';
 $THEME->prescsscallback = 'theme_uonbi_get_pre_scss';
 $THEME->precompiledcsscallback = 'theme_boost_get_precompiled_css';
 $THEME->iconsystem = '\theme_uonbi\util\icon_system';
-//$THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->csspostprocess = 'theme_uonbi_process_css';

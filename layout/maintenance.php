@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A maintenance layout for the University of Nairobi theme.
+ * A maintenance layout for the UONBI theme.
  *
  * @package   theme_uonbi
  * @copyright 2023 Catalyst IT Europe, www.catalyst-eu.net

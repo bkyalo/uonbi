@@ -11,8 +11,9 @@
 
                 &:before {
                     display: inline-block;
-                    font-family: "FontAwesome";
+                    font-family: "Font Awesome 6 Free";
                     font-size: $h5-font-size;
+                    font-weight: 600;
                     content: "\f104";
                 }
                 &.next {

@@ -36,18 +36,16 @@
 }}
 <div role="list">
 {{#courses}}
-    <div class="course-summaryitem m-b-1 p-2" role="listitem"
+    <div class="course-summaryitem pt-4" role="listitem"
         data-region="course-content"
         data-course-id="{{{id}}}" data-overview-course-id="{{{id}}}">
-        <div class="d-flex">
-            <a href="{{viewurl}}" tabindex="-1">
-                <div class="summaryimage rounded-circle m-r-1" style='background-image: url("{{{courseimage}}}");'>
-                    <span class="sr-only">{{#str}}aria:courseimage, core_course{{/str}}</span>
-                </div>
-            </a>
-
-            <div class="align-self-stretch d-flex flex-column w-100">
-                {{#showcoursecategory}}
+        <div class="row align-items-center">
+            <div class="col-md-7 d-flex align-items-center">
+                <a href="{{viewurl}}" class="courseimage">
+                    <div class="rounded summary-image " style="background-image: url({{{courseimage}}});"></div>
+                </a>
+                <div class="course-info-container">
+                    {{#showcoursecategory}}
                     <div class="text-muted muted d-flex flex-wrap">
                         <span class="sr-only">
                             {{#str}}aria:coursecategory, core_course{{/str}}
@@ -56,46 +54,47 @@
                             {{{coursecategory}}}
                         </span>
                     </div>
-                {{/showcoursecategory}}
-                {{^visible}}
-                    <div class="d-flex flex-wrap">
-                        <span class="badge badge-info">{{#str}} hiddenfromstudents {{/str}}</span>
-                    </div>
-                {{/visible}}
-                <div class="d-flex mb-1">
+                    {{/showcoursecategory}}
+                    {{^visible}}
+                        <div class="d-flex flex-wrap">
+                            <span class="badge badge-info my-1">{{#str}} hiddenfromstudents {{/str}}</span>
+                        </div>
+                    {{/visible}}
                     {{#showshortname}}
-                        <span class="sr-only">
-                            {{#str}}aria:courseshortname, core_course{{/str}}
-                        </span>
-                        <div class="text-muted muted mb-1">
-                            {{{shortname}}}
+                        <div class="text-muted muted d-flex flex-wrap">
+                            {{#showcoursecategory}}
+                                <div class="pl-1 pr-1">|</div>
+                            {{/showcoursecategory}}
+                            <span class="sr-only">
+                                {{#str}}aria:courseshortname, core_course{{/str}}
+                            </span>
+                            <div>{{{shortname}}}</div>
                         </div>
                     {{/showshortname}}
-                    <span class="sr-only">
-                        {{#str}}aria:coursename, core_course{{/str}}
-                    </span>
-                    <span class="sr-only">
-                        {{#str}}aria:coursecategory, core_course{{/str}}
-                    </span>
-                    <a href="{{viewurl}}" class="coursename d-flex">
+                    <a href="{{viewurl}}" class="aalink coursename">
                         {{> core_course/favouriteicon }}
                         <span class="sr-only">
                             {{#str}}aria:coursename, core_course{{/str}}
                         </span>
                         {{{fullname}}}
                     </a>
-                    {{> block_myoverview/course-action-menu }}
-                </div>
-                <div class="summary">
-                    <span class="sr-only">{{#str}}aria:coursesummary, block_myoverview{{/str}}</span>
-                    <div id="course-summary-{{{id}}}">
-                        {{{summary}}}
+                    <div class="pt-0">
+                        {{#hasprogress}}
+                            {{> block_myoverview/progress-bar}}
+                        {{/hasprogress}}
                     </div>
                 </div>
-                <div class="pt-1">
-                    {{#hasprogress}}
-                        {{> block_myoverview/progress-bar}}
-                    {{/hasprogress}}
+            </div>
+            <div class="col-md-4 summary-icons"></div>
+            <div class="col-md-1 d-flex course-action-menu">
+                {{> block_myoverview/course-action-menu }}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 summary">
+                <span class="sr-only">{{#str}}aria:coursesummary, block_myoverview{{/str}}</span>
+                <div id="course-summary-{{{id}}}">
+                    {{{summary}}}
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ $white:  #ffffff;
 $black:  #000000;
 $red:  #db3448;
 $teal:  #11b297;
+$green: #6fba25;
 $black_20:  rgba(0, 0, 0, 0.2);
 $black_50:  rgba(0, 0, 0, 0.5);
 $black_53_3:  rgba(0, 0, 0, 0.533);
@@ -10,46 +11,50 @@ $black_75:  rgba(0, 0, 0, .75);
 $primary:  #20a2b7 !default;
 $secondary:  #11b297 !default;
 
-$gray-dark:  #373a3c !default;
-$gray:  #55595c !default;
-$gray-500: #8f959e !default;
-$gray-600:  $gray !default;
-$gray-light: $gray-500 !default;
-$gray-lighter:  #eceeef !default;
-$gray-lightest:  #f7f7f9 !default;
-$gray-border:  #d7dfe3 !default;
+$gray-100: #f7f7f9 !default;
+$gray-200: #e9ecef !default;
+$gray-300: #d7dfe3 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #55595c !default;
+$gray-700: #373a3c !default;
+$gray-800: #212529 !default;
+$gray-900: #1e2939 !default;
 
 $font-family-sans-serif: "Poppins", Arial, Helvetica, sans-serif !default;
-$font-color: $gray-dark !default;
+
+$body_bg:  $gray-200 !default;
+$body-color: $gray-800 !default;
 
 $line-height-base: 1.6 !default;
 
-$border-radius: 2px !default;
-
 $font-size-base: 1rem !default;
-$h1-font-size:  2.7rem !default;
+$h1-font-size:  2.5rem !default;
 $h2-font-size:  2rem !default;
 $h3-font-size:  1.8rem !default;
 $h4-font-size:  1.5rem !default;
 $h5-font-size:  1.2rem !default;
-$h6-font-size:  1rem !default;
+$h6-font-size:  $font-size-base !default;
 $h7-font-size:  $font-size-base !default;
 
-$headings-font-family:  $font-family-sans-serif;
-$headings-font-weight:  600;
-$headings-color:  #323c4b !default;
+$headings-font-family:  $font-family-sans-serif !default;
+$headings-font-weight: 400 !default;
+$headings-color: $gray-700 !default;
 
 $link-color: $primary !default;
-$link-hover-color: $gray-dark !default;
+$link-hover-color: $body-color !default;
 
 $logo-light: invert(95%) sepia(100%) saturate(20%) hue-rotate(11deg) brightness(106%) contrast(104%);
 $logo-dark: brightness(0) saturate(100%) invert(11%) sepia(50%) saturate(571%) hue-rotate(176deg) brightness(93%) contrast(88%);
 
 $icon-light: brightness(0) invert(1);
-$icon-dark: $font-color;
+$icon-dark: $body-color;
 
-$border-color:  #dddddd !default;
-$border-color-dark:  #cccccc !default;
+$border-color:  $gray-300 !default;
+$border-color-dark:  darken($gray-700, 15%) !default;
+$border-radius: .2rem !default;
+$border-radius-sm: ($border-radius / 2) !default;
+$border-radius-lg: ($border-radius * 2) !default;
 
 $btn-primary-color:  $white !default;
 $btn-primary-bg:  $primary !default;
@@ -57,31 +62,32 @@ $btn-primary-border:  $btn-primary-bg !default;
 $btn-secondary-color:  $white !default;
 $btn-secondary-bg:  $secondary !default;
 $btn-secondary-border:  $btn-secondary-bg !default;
-$btn-disabled-color:  $font-color;
-$btn-disabled-bg:  $gray-border;
-$btn-disabled-border:  $gray-border;
+$btn-disabled-color:  $body-color;
+$btn-disabled-bg:  $border-color;
+$btn-disabled-border:  $border-color;
+$btn-border-radius: .2rem !default;
+$btn-border-radius-sm:  ($btn-border-radius / 2) !default;
+$btn-border-radius-lg:  ($btn-border-radius * 2) !default;
 
-// Boost variables for changing btn padding.
-// Uncomment to adjust paddings for btn and form-control classes.
-//$input-btn-padding-y:         .375rem !default;
-//$input-btn-padding-x:         .75rem !default;
-$input-btn-border-width:  $border-radius !default;
+$input-btn-border-width:  2px !default;
 
-$body_bg:  #e9ecef !default;
+$tooltip-border-radius: $btn-border-radius-sm;
 
 $loginlogo_bg: transparent !default;
 
 $spacer: 1rem;
+
 $title-pad: $spacer;
 
-$card-border-radius:  $border-radius * 2;
-$card-border-color:  $gray-border;
+$card-bg: $white !default;
+$card-border-radius:  .4rem !default;
+$card-border-color:  $border-color !default;
 
 $navbar-height:  64px !default;
 $navbar-bg-custom:  $white !default;
 $navbar-bg-hover: $secondary !default;
 $navbar-link-color: $primary !default;
-$navbar-separator: #374850;
+$navbar-separator: $gray-700;
 $navbar-border-height: 0px !default;
 $navbar-border-color: $primary !default;
 $navbar-primary-nav-active-border-color: darken($primary, 20%);
@@ -89,9 +95,11 @@ $navbar-primary-nav-active-border-color: darken($primary, 20%);
 $logo-bg-color: transparent !default;
 
 $nav-drawer:  285px;
-$nav-drawer-bg: #1e2A3A !default;
+$nav-drawer-bg: $gray-900 !default;
 $nav-drawer-closed:  60px;
 $nav-drawer-text-color: $white !default;
+$nav-drawer-active-color: $white !default;
+$drawer-bg-color: $white !default;
 $navdrawerlink: $secondary !default;
 
 $footer-bg: $white !default;
@@ -100,13 +108,22 @@ $blocks-column-width: 340px !default;
 
 $progress-circle-size: 100px;
 
-$success: #6fba25;
+$success: $green;
 
 $xs:  480px;
 $sm:  576px;
 $md:  768px;
 $lg:  992px;
 $xl:  1280px;
-$xxl: 1800px;
 
 $max-page-width:  1530px;
+
+// TO BE DEPRECATED FROM UONBI
+$font-color: $body-color !default;
+$gray-dark:  $body-color !default;
+$gray: $gray-600 !default;
+$gray-light: $gray-500 !default;
+$gray-lighter: $gray-200 !default;
+$gray-lightest: $gray-100 !default;
+$gray-border: $gray-300 !default;
+$headings-weight: 600 !default;

@@ -38,7 +38,15 @@ class block_myoverview_renderer extends \block_myoverview\output\renderer {
      * @return string HTML string
      */
     public function render_main(main $main) {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $USER;
+
+        if (!count(enrol_get_all_users_courses($USER->id, true))) {
+            return $this->render_from_template(
+                'block_myoverview/zero-state',
+                $main->export_for_zero_state_template($this)
+            );
+        }
+
         $data = $main->export_for_template($this);
 
         // Identify the course IDs.

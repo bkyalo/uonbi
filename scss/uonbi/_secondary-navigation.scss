@@ -1,7 +1,7 @@
 .secondary-navigation {
     max-width: 100%;
     position: sticky;
-    top: 0;
+    top: calc(#{$navbar-height} + #{$navbar-border-height});
     z-index: 10;
     margin: 0 auto 0;
     padding: 0;
@@ -9,24 +9,28 @@
     .notloggedin & {
         display: none;
     }
-    .format-tiles-tile-open & {
+    .format-tiles-tile-open &,
+    .path-grade-report-grader & {
         position: unset;
     }
 
     .navigation {
         padding: 0;
         margin: 0 auto;
-        background: $white;
+        border-top-left-radius: $card-border-radius;
+        border-top-right-radius: $card-border-radius;
         .nav-tabs {
             max-width: 100% !important;
-            background: transparent;
+            background: $white;
+            border-top-left-radius: $card-border-radius;
+            border-top-right-radius: $card-border-radius;
             .nav-item {
                 background: transparent;
                 .nav-link {
                     &:hover {
                         cursor: pointer;
                         border-bottom-color: $primary;
-                        background: $gray-lightest;
+                        background: $gray-100;
                     }
                     &.active {
                         border-bottom-color: $link-color;
@@ -34,6 +38,11 @@
                 }
                 .nav-item {
                     background-color: transparent;
+                }
+                &:first-of-type {
+                    .nav-link {
+                        border-top-left-radius: $card-border-radius;
+                    }
                 }
             }
         }

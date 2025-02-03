@@ -38,11 +38,12 @@
 {{#courses}}
     <li class="list-group-item course-listitem px-2"
         data-region="course-content"
-        data-course-id="{{{id}}}" data-overview-course-id="{{{id}}}">
-        <div class="row-fluid">
-            <div class="col-md-7 span7 d-flex align-items-center">
+        data-course-id="{{{id}}}"
+        data-overview-course-id="{{{id}}}">
+        <div class="row align-items-center">
+            <div class="col-md-7 d-flex align-items-center">
                 <a href="{{viewurl}}" class="courseimage">
-                    <div class="list-view-bgimage" style="background-image: url({{{courseimage}}});"></div>
+                    <div class="rounded list-image mw-100" style="background-image: url({{{courseimage}}});"></div>
                 </a>
                 <div class="course-info-container">
                     {{#showcoursecategory}}
@@ -57,7 +58,7 @@
                     {{/showcoursecategory}}
                     {{^visible}}
                         <div class="d-flex flex-wrap">
-                            <span class="badge badge-info">{{#str}} hiddenfromstudents {{/str}}</span>
+                            <span class="badge badge-info my-1">{{#str}} hiddenfromstudents {{/str}}</span>
                         </div>
                     {{/visible}}
                     {{#showshortname}}
@@ -87,8 +88,8 @@
                     {{/hasprogress}}
                 </div>
             </div>
-            <div class="col-md-4 span4 summary-icons"></div>
-            <div class="col-md-1 span1 d-flex course-action-menu">
+            <div class="col-md-4 summary-icons"></div>
+            <div class="col-md-1 d-flex course-action-menu">
                 {{> block_myoverview/course-action-menu }}
             </div>
         </div>

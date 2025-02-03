@@ -1,8 +1,40 @@
 @function set-footer-text-color($color){
   @if (lightness($color) > 49) {
-    @return $font-color; // Lighter background, return dark color
+    @return $body-color; // Lighter background, return dark color
   } @else {
     @return $white; // Darker background, return light color
+  }
+}
+
+@function set-footer-text-color-hover($color){
+  @if (lightness($color) > 49) {
+    @return $white; // Darker background, return light color
+  } @else {
+    @return $body-color; // Lighter background, return dark color
+  }
+}
+
+@function set-footer-filter-color($color){
+  @if (lightness($color) > 49) {
+    @return invert(0); // Lighter background, return dark color
+  } @else {
+    @return invert(1); // Darker background, return light color
+  }
+}
+
+@function set-footer-filter-color-hover($color){
+  @if (lightness($color) > 49) {
+    @return invert(1); // Lighter background, return dark color
+  } @else {
+    @return invert(0); // Darker background, return light color
+  }
+}
+
+@function set-footer-border-color($color){
+  @if (lightness($color) > 49) {
+    @return rgba(0,0,0,0.15); // Lighter background, return dark color
+  } @else {
+    @return rgba(255,255,255,0.3); // Darker background, return light color
   }
 }
 
@@ -16,7 +48,7 @@
 
 @function set-primary-text-color($color){
   @if (lightness($color) > 49) {
-    @return $font-color; // Lighter background, return dark color
+    @return $body-color; // Lighter background, return dark color
   } @else {
     @return $white; // Darker background, return light color
   }
@@ -34,7 +66,7 @@
   @if (lightness($color) > 49) {
     @return rgba(0,0,0,0.2); // Lighter background, return dark color
   } @else {
-    @return rgba(255,255,255,0.25); // Darker background, return light color
+    @return rgba(255,255,255,0.1); // Darker background, return light color
   }
 }
 

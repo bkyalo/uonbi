@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A two column layout for the University of Nairobi theme.
+ * A two column layout for the UONBI theme.
  *
  * @package   theme_uonbi
  * @copyright 2022 Catalyst IT Europe, www.catalyst-eu.net
@@ -24,14 +24,28 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-
 require_once($CFG->libdir . '/behat/lib.php');
 
 if (isloggedin()) {
-    $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
+    $navdraweropen = (get_user_preferences('drawer-open-nav') === true);
 } else {
     $navdraweropen = false;
+}
+
+if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_closed') != 1) {
+    $navdraweropen = false;
+}
+
+$secondarynavigation = false;
+$overflow = '';
+if ($PAGE->has_secondary_navigation()) {
+    $tablistnav = $PAGE->has_tablist_secondary_navigation();
+    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+    $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+    $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
+    if (!is_null($overflowdata)) {
+        $overflow = $overflowdata->export_for_template($OUTPUT);
+    }
 }
 
 // Add block button in editing mode.
@@ -69,6 +83,7 @@ $haspagebtmblocks = (strpos($pagebtmblockshtml, 'data-block=') !== false || !emp
 $primary = new core\navigation\output\primary($PAGE);
 $renderer = $PAGE->get_renderer('core');
 $primarymenu = $primary->export_for_template($renderer);
+
 $fburl = theme_uonbi_get_setting('fburl');
 $instaurl = theme_uonbi_get_setting('instaurl');
 $pinurl = theme_uonbi_get_setting('pinurl');
@@ -146,6 +161,12 @@ $templatecontext = [
 $templatecontext['hamburgerpos'] = false;
 if (!empty($theme->settings->hamburgerpos)) {
     $templatecontext['hamburgerpos'] = true;
+}
+
+$loginbtn = theme_uonbi_get_setting('loginbtn');
+$loginbtnshow = $loginbtn == 2;
+if (!empty($loginbtnshow) && !isloggedin()) {
+    $templatecontext['loginbtn'] = true;
 }
 
 // Improve boost navigation.

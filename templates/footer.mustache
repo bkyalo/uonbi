@@ -1,4 +1,54 @@
 <footer id="page-footer" data-region="mainpage" class="bg-inverse">
+    <div data-region="footer-container-popover">
+        {{#output.has_communication_links}}
+            <button onclick="window.open('{{output.communication_url}}', '_blank', 'noreferrer')" class="btn btn-icon bg-primary text-white icon-no-margin btn-footer-communication" aria-label="{{#str}}communicationroomlink, course{{/str}}">
+                {{#pix}}t/messages-o, core{{/pix}}
+            </button>
+        {{/output.has_communication_links}}
+        <button class="btn btn-icon btn-primary icon-no-margin btn-footer-popover" data-action="footer-popover" aria-label="{{#str}}showfooter, theme_boost{{/str}}">
+            {{#pix}}e/question, core{{/pix}}
+        </button>
+    </div>
+    <div class="footer-content-popover container" data-region="footer-content-popover">
+        {{#output.has_communication_links}}
+            <div class="footer-section p-3 border-bottom footer-link-communication">
+                <div class="footer-support-link">{{{ output.communication_link }}}</div>
+            </div>
+        {{/output.has_communication_links}}
+        {{# output.has_popover_links }}
+            <div class="footer-section p-3 border-bottom">
+                {{# output.page_doc_link }}
+                    <div class="footer-support-link">{{{ output.page_doc_link }}}</div>
+                {{/ output.page_doc_link }}
+
+                {{# output.services_support_link }}
+                    <div class="footer-support-link">{{{ output.services_support_link }}}</div>
+                {{/ output.services_support_link }}
+
+                {{# output.supportemail }}
+                    <div class="footer-support-link">{{{ output.supportemail }}}</div>
+                {{/ output.supportemail }}
+            </div>
+        {{/ output.has_popover_links }}
+        <div class="footer-section p-3 border-bottom">
+            <div class="logininfo">
+                {{{ output.login_info }}}
+            </div>
+            <div class="tool_usertours-resettourcontainer">
+            </div>
+
+            {{{ output.standard_footer_html }}}
+            {{{ output.standard_end_of_body_html }}}
+        </div>
+        <div class="footer-section p-3">
+            <div>{{#str}}poweredbymoodle, core{{/str}}</div>
+            {{#output.moodle_release}}
+                <div>
+                    {{#str}}version, core{{/str}} {{{ output.moodle_release }}}
+                </div>
+            {{/output.moodle_release}}
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="footer-lists row">
             {{# footerlinks1 }}
@@ -47,45 +97,32 @@
                         </p>
                     </div>
                 {{/ contacts }}
-                {{{ output.standard_footer_html }}}
-
-                {{# output.page_doc_link }}
-                    <div class="moodlehelp">{{{ output.page_doc_link }}}</div>
-                {{/ output.page_doc_link }}
-
             </div>
             <div class="col-md-12 col-lg-5">
-                <div class="copyright mb-3">
+                <div class="copyright ml-auto mb-3 d-lg-flex justify-content-end">
                     {{{copyright}}}
                 </div>
 
                 {{# social }}
-                <div class="social-media float-right">
-                    <ul>
+                <div class="social-media">
+                    <ul class="d-lg-flex align-items-center flex-wrap justify-content-end">
                      {{# fburl}}
-                        <li class="sm-01"><a href="{{fburl}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li class="sm-01"><a href="{{fburl}}" target="_blank"><i class="fa fa-brands fa-facebook"></i></a></li>
                     {{/ fburl}}
                     {{# twurl}}
-                        <li class="sm-02">
-                            <a href="{{twurl}}" target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16">
-                                    <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
-                                </svg>
-                            </a>
-                        </li>
+                        <li class="sm-02"><a href="{{twurl}}" target="_blank"><i class="fa fa-brands fa-x-twitter"></i></a></li>
                     {{/ twurl}}
                     {{# instaurl}}
-                        <li class="sm-03"><a href="{{instaurl}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li class="sm-03"><a href="{{instaurl}}" target="_blank"><i class="fa fa-brands fa-instagram"></i></a></li>
                     {{/ instaurl}}
                     {{# linkedinurl}}
-                       <li class="sm-04"><a href="{{linkedinurl}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                       <li class="sm-04"><a href="{{linkedinurl}}" target="_blank"><i class="fa fa-brands fa-linkedin"></i></a></li>
                     {{/ linkedinurl}}
                     {{# pinurl}}
-                       <li class="sm-05"><a href="{{pinurl}}" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+                       <li class="sm-05"><a href="{{pinurl}}" target="_blank"><i class="fa fa-brands fa-pinterest"></i></a></li>
                     {{/ pinurl}}
                     {{# youtubeurl}}
-                        <li class="sm-07"><a href="{{youtubeurl}}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                        <li class="sm-07"><a href="{{youtubeurl}}" target="_blank"><i class="fa fa-brands fa-youtube-play"></i></a></li>
                     {{/ youtubeurl}}
                     </ul>
                 </div>
@@ -93,20 +130,17 @@
             </div>
         </div>
 
-        <div class="tool_usertours-resettourcontainer text-center"></div>
-            {{{output.standard_end_of_body_html}}}
-        </div>
-
-
         <div class="footer-content-debugging my-3">
-            <div class="container-fluid">
-                {{{ output.debug_footer_html }}}
-            </div>
+            {{{ output.debug_footer_html }}}
         </div>
-
-        <a onclick="('{{scrollTop}}')" id="topbutton" class="back-to-top" title="Go to top"><i class="fa fa-chevron-up "></i></a>
     </div>
 </footer>
+
+{{#js}}
+require(['theme_boost/footer-popover'], function(FooterPopover) {
+    FooterPopover.init();
+});
+{{/js}}
 
 <!-- Modal -->
 <div class="modal fade" id="loadingmodal" tabindex="-1" role="dialog" aria-labelledby="loadingmodallabel" aria-hidden="true" data-waiting="{{enablewaiting}}">

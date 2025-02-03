@@ -1,12 +1,12 @@
 /** The message area **/
 @mixin setSelectedContact() {
     background-color: #4f94cd;
-    color: #fff;
+    color: $white;
     border: none;
 
     .information {
         .lastmessage {
-            color: #fff;
+            color: $white;
         }
     }
     .picture {
@@ -15,11 +15,13 @@
 }
 
 .message-app {
-    background: $gray-lighter;
+    background: $white;
     .contact-status {
-        top: 10px;
+        top: 0;
         &.online {
-            background-color: $success;
+            .fa::before {
+                color: $success;
+            }
         }
     }
     .header-container {
@@ -28,10 +30,17 @@
             text-align: left;
         }
     }
+    .list-group {
+        .list-group-item {
+            &:focus, &:hover {
+                color: set-primary-text-color($primary);
+            }
+        }
+    }
 }
 
 .messaging-area-container {
-    margin-bottom: 30px;
+    margin-bottom: ($spacer * 2);
 
     .status {
         .online-text {
@@ -59,7 +68,7 @@
     }
 
     .messaging-area {
-        border: 1px solid #e3e3e3;
+        border: 1px solid $gray-200;
         clear: both;
 
         img {
@@ -67,7 +76,7 @@
         }
 
         .contacts-area {
-            border-right: 1px solid #e3e3e3;
+            border-right: 1px solid $gray-200;
             height: 600px;
             @media (max-height: 670px) {
                 height: 500px;
@@ -93,7 +102,7 @@
                 height: 50px;
                 box-sizing: border-box;
                 line-height: 50px;
-                background-color: #fff;
+                background-color: $white;
                 transition: background-color linear 0.2s;
 
                 input {
@@ -102,7 +111,7 @@
                     margin-bottom: 10px;
                     vertical-align: middle;
                     padding: 4px 6px;
-                    background-color: #f5f5f5;
+                    background-color: $gray-100;
                     border: 0;
                     width: 90%;
                     box-shadow: none;
@@ -114,11 +123,11 @@
                 }
 
                 &.searching {
-                    background-color: #f5f5f5;
+                    background-color: $gray-100;
                     transition: background-color linear 0.2s;
 
                     input {
-                        background-color: #fff;
+                        background-color: $white;
                         transition: background-color linear 0.2s;
                     }
                 }
@@ -153,7 +162,7 @@
 
                     &:hover {
                         background-color: #4f94cd;
-                        color: #fff;
+                        color: $white;
                         border: none;
                         cursor: pointer;
                     }
@@ -181,14 +190,14 @@
                 .contact {
                     height: 66px;
                     cursor: pointer;
-                    border-bottom: 1px solid #e3e3e3;
+                    border-bottom: 1px solid $gray-200;
                     box-sizing: border-box;
 
                     &.unread {
-                        background-color: #f1f1f1;
+                        background-color: $gray-100;
 
                         .picture {
-                            border-color: #f1f1f1;
+                            border-color: $gray-100;
                         }
 
                         .information {
@@ -215,7 +224,7 @@
                         line-height: 66px;
                         text-align: center;
                         height: 66px;
-                        border-bottom: 1px solid #fff;
+                        border-bottom: 1px solid $white;
                         width: 25%;
                         float: left;
                         display: inline-block;
@@ -251,7 +260,7 @@
                             overflow: hidden;
                             text-overflow: ellipsis;
                             white-space: nowrap;
-                            color: #a1a1a1;
+                            color: $gray-500;
                             padding-right: 10px;
                         }
                     }
@@ -270,14 +279,14 @@
             }
 
             .tabs {
-                border-top: 1px solid #e3e3e3;
+                border-top: 1px solid $gray-200;
                 height: 50px;
                 box-sizing: border-box;
 
                 .tab {
                     cursor: pointer;
                     height: 100%;
-                    background-color: #f5f5f5;
+                    background-color: $gray-100;
                     margin: 0;
                     width: 50%;
                     text-align: center;
@@ -346,7 +355,7 @@
             }
 
             .profile {
-                padding: 30px;
+                padding: ($spacer * 2);
                 font-size: 16px;
                 height: 600px;
                 @media (max-height: 670px) {
@@ -407,7 +416,7 @@
                     padding-top: 80px;
 
                     .separator {
-                        border-bottom: 1px solid #e3e3e3;
+                        border-bottom: 1px solid $gray-200;
                         margin-bottom: 20px;
                         padding-bottom: 5px;
 
@@ -425,7 +434,7 @@
                 font-weight: 600;
                 line-height: 50px;
                 box-sizing: border-box;
-                border-bottom: 1px solid #e3e3e3;
+                border-bottom: 1px solid $gray-200;
                 text-align: center;
                 position: relative;
 
@@ -480,7 +489,7 @@
                 .blocktime {
                     clear: both;
                     text-align: center;
-                    color: #a1a1a1;
+                    color: $gray-500;
                     font-size: 12px;
                     margin: 5px 0;
                 }
@@ -494,7 +503,7 @@
                     }
 
                     .content {
-                        border: 1px solid #e3e3e3;
+                        border: 1px solid $gray-200;
                         padding: 10px;
                         margin-bottom: 5px;
                         font-size: 12px;
@@ -512,7 +521,7 @@
 
                         .timesent {
                             font-size: 10px;
-                            color: #a1a1a1;
+                            color: $gray-500;
                             float: right;
                         }
                     }
@@ -536,9 +545,9 @@
                 width: 100%;
                 line-height: 28px;
                 text-align: center;
-                border-top: 1px solid #e3e3e3;
+                border-top: 1px solid $gray-200;
                 box-sizing: border-box;
-                background-color: #fff;
+                background-color: $white;
                 transition: background-color linear 0.2s;
 
                 .delete-confirmation {
@@ -546,11 +555,11 @@
 
                     .btn.btn-link.confirm {
                         border: 1px solid #4f94cd;
-                        height: 30px;
+                        height: ($spacer * 2);
 
                         &:hover {
                             background-color: #4f94cd;
-                            color: #fff;
+                            color: $white;
                             text-shadow: none;
                         }
                     }
@@ -572,7 +581,7 @@
                             border: none;
                             box-shadow: none;
                             box-sizing: border-box;
-                            background-color: #f5f5f5;
+                            background-color: $gray-100;
                             transition: background-color linear 0.2s;
 
                             &:focus {
@@ -586,19 +595,19 @@
                         width: 1px;
 
                         button {
-                            height: 30px;
+                            height: ($spacer * 2);
                         }
                     }
                 }
 
                 &.messaging {
-                    background-color: #f5f5f5;
+                    background-color: $gray-100;
                     transition: background-color linear 0.2s;
 
                     .message-box {
                         .message-text-container {
                             textarea {
-                                background-color: #fff;
+                                background-color: $white;
                                 transition: background-color linear 0.2s;
                             }
                         }
@@ -645,10 +654,10 @@
                             .content {
                                 background-color: #4f94cd;
                                 border-color: #4f94cd;
-                                color: #fff;
+                                color: $white;
 
                                 .timesent {
-                                    color: #fff;
+                                    color: $white;
                                 }
                             }
                         }
@@ -657,10 +666,10 @@
                             .content {
                                 &:hover {
                                     background-color: #79b5e6;
-                                    color: #fff;
+                                    color: $white;
 
                                     .timesent {
-                                        color: #fff;
+                                        color: $white;
                                     }
                                 }
                             }
@@ -694,7 +703,7 @@
         vertical-align: bottom;
     }
     .preference-table {
-        border: 1px solid #ddd;
+        border: 1px solid $border-color;
 
         thead {
             th {
@@ -718,11 +727,11 @@
                     text-align: center;
                 }
                 &:nth-child(even) {
-                    background-color: #f7f7f7;
+                    background-color: $gray-100;
                 }
             }
             th:nth-child(even) {
-                background-color: #f7f7f7;
+                background-color: $gray-100;
             }
         }
         .preference-row {
@@ -745,7 +754,7 @@
                 vertical-align: middle;
 
                 input[type="checkbox"]:checked + .preference-state-status-container {
-                    background-color: #5cb85c;
+                    background-color: $success;
 
                     .on-text {
                         display: inline-block;
@@ -759,9 +768,9 @@
                     height: 30px;
                     line-height: 30px;
                     text-align: center;
-                    border-radius: 4px;
+                    border-radius: $border-radius;
                     background-color: #d9534f;
-                    color: #fff;
+                    color: $white;
                     cursor: pointer;
 
                     .loading-icon {
@@ -859,7 +868,7 @@
 
 .preferences-page-container {
     .checkbox-container {
-        margin: 30px 5px;
+        margin: ($spacer * 2) 5px;
         line-height: 20px;
 
         input {
@@ -885,9 +894,9 @@
         height: 500px;
     }
     box-sizing: border-box;
-    border-radius: 4px;
-    margin-bottom: 30px;
-    border: 1px solid #e3e3e3;
+    border-radius: $border-radius;
+    margin-bottom: ($spacer * 2);
+    border: 1px solid $gray-200;
 
     .control-area {
         box-sizing: border-box;
@@ -896,13 +905,19 @@
         height: 100%;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
-        border-right: 1px solid #e3e3e3;
+        border-right: 1px solid $gray-200;
 
         .content {
             position: relative;
 
             .content-item-container {
                 cursor: pointer;
+                &:focus, &:hover {
+                    color: set-primary-text-color($primary);
+                    .timestamp {
+                        color: set-primary-text-color($primary);
+                    }
+                }
             }
 
             &:empty + .empty-text {
@@ -947,7 +962,7 @@
         .header {
             height: 50px;
             box-sizing: border-box;
-            border-bottom: 1px solid #e3e3e3;
+            border-bottom: 1px solid $gray-200;
             padding: 5px;
 
             .image-container {
@@ -972,8 +987,7 @@
                 font-size: 10px;
                 line-height: 10px;
                 margin: 0;
-                color: #666;
-                margin-left: 30px;
+                margin-left: ($spacer * 2);
             }
 
             &:empty {
@@ -981,7 +995,7 @@
             }
         }
 
-        > .content {
+        .content {
             height: 500px;
             @media (max-height: 670px) {
                 height: 400px;
@@ -1114,7 +1128,7 @@
                         &.selected {
                             background-color: inherit;
                             color: inherit;
-                            border-bottom: 1px solid #e3e3e3;
+                            border-bottom: 1px solid $gray-200;
 
                             &:hover {
                                 @include setSelectedContact();
@@ -1122,7 +1136,7 @@
                             }
 
                             .picture {
-                                border-bottom: 1px solid #fff;
+                                border-bottom: 1px solid $white;
                             }
 
                             .information {
@@ -1175,8 +1189,8 @@
                 height: 50px;
                 line-height: 50px;
                 box-sizing: border-box;
-                border-right: 1px solid #e3e3e3;
-                border-bottom: 1px solid #e3e3e3;
+                border-right: 1px solid $gray-200;
+                border-bottom: 1px solid $gray-200;
             }
 
             .header {
@@ -1413,7 +1427,7 @@ $message-drawer-width: 320px;
     }
     input + label::before {
         right: 0;
-        background-color: #dee2e6;
+        background-color: $border-color;
         border-radius: 1.725rem;
         transition: 0.2s all;
     }
@@ -1423,7 +1437,7 @@ $message-drawer-width: 320px;
         width: calc(1.725rem - 4px);
         height: calc(1.725rem - 4px);
         border-radius: 50%;
-        background-color: #fff;
+        background-color: $white;
         transition: 0.2s all;
     }
     input:checked + label::before {
@@ -1441,7 +1455,7 @@ $message-drawer-width: 320px;
         cursor: not-allowed;
     }
     input:disabled + label::before {
-        background-color: #e9ecef;
+        background-color: $gray-200;
     }
 }
 
@@ -1458,11 +1472,11 @@ $message-drawer-width: 320px;
                         height: 80px;
 
                         .delete-all {
-                            top: 30px;
+                            top: ($spacer * 2);
                         }
 
                         .actions {
-                            top: 30px;
+                            top: ($spacer * 2);
                         }
                     }
 

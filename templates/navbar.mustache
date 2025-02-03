@@ -23,15 +23,17 @@
         <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="navbar-toggler aabtn d-block" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}<span class="sr-only">{{#str}}sidepanel, core{{/str}}</span></button>
     </div>
     {{/ hamburgerposleft }}
-    <a href="{{{ config.homeurl }}}" class="navbar-brand d-none d-md-flex align-items-center p-0 aabtn">
 
+    <a href="{{{ config.homeurl }}}" class="navbar-brand d-none d-md-flex align-items-center m-0 me-4 p-0 aabtn">
         {{# output.should_display_navbar_logo }}
-            <img src="{{output.get_compact_logo_url}}" class="logo mr-1" alt="{{sitename}}">
+            <img src="{{output.get_compact_logo_url}}" class="logo me-1 ml-3" alt="{{sitename}}">
         {{/ output.should_display_navbar_logo }}
         {{^ output.should_display_navbar_logo }}
-            {{{ sitename }}}
+            <img src="/theme/uonbi/pix/logo_compact.png" class="logo mr-1 ml-3" alt="{{sitename}}">
+            <h1 class="login-heading sr-only">{{#str}} loginto, core, {{sitename}} {{/str}}</h1>
         {{/ output.should_display_navbar_logo }}
     </a>
+
     {{^ hamburgerposleft }}
     <div data-region="drawer-toggle" class="drawer-toggle">
         <button aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" class="navbar-toggler aabtn d-block" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">{{#pix}}i/menubars{{/pix}}<span class="sr-only">{{#str}}sidepanel, core{{/str}}</span></button>
@@ -56,7 +58,9 @@
         {{{ output.navbar_plugin_output }}}
         <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
             {{#usermenu}}
-                {{> core/user_menu }}
+                {{^ loginbtn}}
+                    {{> core/user_menu }}
+                {{/ loginbtn}}
             {{/usermenu}}
         </div>
         {{{ output.edit_switch }}}

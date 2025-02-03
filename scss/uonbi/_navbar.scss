@@ -25,6 +25,7 @@
         .nav-item,
         .nav-link {
             font-weight: 600;
+            border: none;
 
             .icon {
                 width: auto;
@@ -99,14 +100,11 @@
     .navbar-brand {
         text-align: center;
         min-width: $nav-drawer - $nav-drawer-closed;
-        margin-left: 1rem;
         margin-right: 0;
         padding: 0 $spacer;
 
-        &.has-logo,
-        &.has-compact-logo {
-            .logo,
-            .logo-compact {
+        &.has-logo {
+            .logo {
                 display: none;
                 text-align: center;
                 width: auto;
@@ -124,39 +122,26 @@
                 }
             }
         }
-        &.has-logo:not(.compact-logo) {
+        &.has-logo {
             .logo {
                 display: flex;
-            }
-        }
-        @media (max-width: ($xl - 1)) {
-            &.has-logo.has-compact-logo {
-                .logo {
-                    display: none;
-                }
-                .logo-compact {
-                    display: flex;
-                }
             }
         }
         .hamburger-left &,
         #page-site-index.notloggedin & {
             min-width: auto;
 
-            &.has-logo .logo img,
-            &.has-logo-compact .logo-compact img {
+            &.has-logo .logo img {
                 margin: auto 0;
             }
         }
         .logo-right & {
             min-width: auto;
 
-            &.has-logo,
-            &.has-logo-compact {
+            &.has-logo {
                 order: 10;
 
-                .logo img,
-                .logo-compact img {
+                .logo img {
                     float: right;
                     margin-right: $spacer;
                 }
@@ -187,8 +172,8 @@
         border-right: 1px solid $border-color;
 
         button {
+            width: calc(#{$nav-drawer-closed} - 2px);
             height: 100%;
-            padding: 0 ($spacer * 1.3);
             border: none;
             background: transparent;
             border-radius: 0;
@@ -221,50 +206,17 @@
         .nav-link,
         .btn-close {
             display: flex !important;
-            width: inherit;
             padding: ($spacer / 2);
             transition: .2s;
             .icon {
-                font-size: 130%;
-                font-weight: normal;
-                color: $font-color;
-                vertical-align: sub;
+                display: flex;
+                align-items: center;
+                font-size: 1.2rem;
+                color: $gray-600;
                 margin: auto;
                 transition: .2s;
-                &.fa-cog {
-                    &:before {
-                        content: "\e09a";
-                    }
-                }
-                &.fa-check {
-                    &:before {
-                        content: "\e080";
-                    }
-                }
-                &.fa-refresh {
-                    &:before {
-                        content: "\e098";
-                    }
-                }
-                &.fa-search {
-                    &:before {
-                        content: "\e090";
-                    }
-                }
-                &.fa-times {
-                    &:before {
-                        font-family: "FontAwesome";
-                        content: "\f057";
-                        color: rgba(255,0,0,.5);
-                    }
-                }
                 &:hover {
                     color: $primary;
-                }
-            }
-            &:hover {
-                .icon {
-                    opacity: .6;
                 }
             }
         }
@@ -272,17 +224,14 @@
         .popover-region-messages,
         .popover-region-notifications {
             margin: 0;
-            .icon:not(.fa-check):not(.fa-times) {
-                &:before {
-                    font-family: "simple-line-icons";
-                }
-            }
             .popover-region-container {
+                color: $body-color;
                 top: $navbar-height;
                 padding-bottom: 11px;
                 box-shadow: 0 0 3px rgba(0,0,0,0.2);
 
                 .content-item-container {
+                    color: $body-color;
                     .content-item-body {
                         font-weight: normal;
                         line-height: 1.2;
@@ -291,10 +240,19 @@
                             font-weight: 600;
                             margin: ($spacer / 5) 0;
                         }
+                        .timestamp {
+                            color: $gray-600;
+                        }
                     }
                     &.unread {
                         .content-item-body {
                             font-weight: 600;
+                        }
+                        &:focus, &:hover {
+                            color: set-primary-text-color($primary);
+                            .timestamp {
+                                color: set-primary-text-color($primary);
+                            }
                         }
                     }
                 }
@@ -306,49 +264,64 @@
             .count-container {
                 font-size: 0;
                 padding: 0;
-                right: 6px;
+                top: auto;
+                bottom: auto;
+                right: 7px;
                 background-color: transparent;
                 &::before {
-                    font-family: "FontAwesome";
-                    font-size: 10px;
+                    font-family: "Font Awesome 6 Free";
+                    font-size: 8px;
                     color: $red;
                     content: "\f111";
                     display: block;
-                    margin-top: 4px;
                     text-shadow: 0 2px 2px rgba(0,0,0,.4);
                 }
             }
         }
         .simplesearchform {
             #searchform-navbar {
+                background: rgba(0,0,0,0.7);
+                @media(min-width: $lg) {
+                    form {
+                        width: 50%;
+                    }
+                }
                 .btn-close {
                     padding: .6rem $spacer;
+                    .icon::before {
+                        content: "\f057";
+                        color: rgba(255, 0, 0, 0.5);
+                    }
+                    &:focus,
+                    &:hover {
+                        box-shadow: none;
+                    }
                 }
                 .btn-submit {
                     font-size: 90%;
+                    color: set-primary-text-color($btn-primary-bg);
                     padding-left: ($spacer / 2);
                     padding-right: ($spacer / 1.5);
+                    border-color: $btn-primary-border;
+                    background-color: $btn-primary-bg;
+                    &:focus,
+                    &:hover {
+                        border-color: darken($btn-primary-bg, 10%);
+                        background-color: darken($btn-primary-bg, 10%);
+                    }
                     .fa-search:before {
-                        font-family: "FontAwesome";
+                        font-family: "Font Awesome 6 Free";
                     }
                 }
             }
+            .btn.nav-link .icon::before {
+                font-family: "simple-line-icons";
+                content: "\e090";
+            }
         }
         .popover-region-messages {
-            .icon.fa-comment {
-                &:before {
-                    content: "\e086";
-                }
-            }
             @media (max-width: ($sm - 1)) {
                 display: none;
-            }
-        }
-        .popover-region-notifications {
-            .icon.fa-bell {
-                &:before {
-                    content: "\e027";
-                }
             }
         }
 
@@ -395,7 +368,7 @@
                     padding: ($spacer / 2) $spacer;
                     background: $primary;
                     border: none;
-                    border-radius: 50px;
+                    border-radius: $btn-border-radius-lg;
                     transition: .4s;
 
                     &:focus,
@@ -430,9 +403,7 @@
                 .avatar {
                     cursor: pointer;
                     img {
-                        margin-right: -2px;
                         border: 1px solid $white;
-                        box-shadow: 0 4px 4px rgba(0,0,0,0.25);
                     }
                     .userinitials {
                         margin-right: 0;
@@ -447,16 +418,42 @@
                         display: none;
                     }
                 }
-                &-menu {
-                    min-width: 270px;
-                }
             }
         }
     }
 
     .editmode-switch-form {
+        margin: auto;
         label {
-            margin-top: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1;
+            text-align: center;
+            color: inherit !important;
+            text-transform: uppercase;
+            max-width: 40px;
+            margin-top: 7px;
+            margin-right: 0.3rem !important;
+        }
+        .custom-control-label {
+            &::before {
+                border-color: $gray-500;
+                background-color: $gray-100;
+            }
+            &::after {
+                background-color: $gray-500;
+            }
+        }
+        .custom-control-input:checked {
+            ~ .custom-control-label {
+                &::before {
+                    border-color: set-header-border-color($navbar-bg-custom);
+                    background-color: $gray-500;
+                }
+                &::after {
+                    background-color: $gray-100;
+                }
+            }
         }
     }
 
@@ -522,35 +519,28 @@
     }
     .custom-header & {
         .nav-item,
-        .search-input-wrapper {
-            .caret,
-            .nav-link,
-            .dropdown-toggle,
-            .nav-link .fa.icon {
-                color: $navbar-link-color !important;
-            }
-            .nav-link {
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-        .drawer-toggle,
         .usermenu,
+        .drawer-toggle,
         .popover-region-toggle,
         .simplesearchform {
-            .fa-bars,
-            > .fa-bell,
-            > .icon-bubble,
-            > div > .icon,
+            .fa:not(.fa-magnifying-glass),
+            .dropdown-toggle,
             > form > input,
             > .btn-open .icon,
             .userbutton .usertext {
-                opacity: 1;
                 color: $navbar-link-color !important;
+                &:hover {
+                    color: darken($navbar-link-color, 10%) !important;
+                }
             }
             .dropdown-toggle:after {
                 border-top-color: $navbar-link-color !important;
+            }
+        }
+        .nav-item .nav-link {
+            &:hover {
+                color: darken($navbar-link-color, 10%) !important;
+                text-decoration: underline;
             }
         }
         .divider,

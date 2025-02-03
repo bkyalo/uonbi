@@ -27,15 +27,17 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 
+$courseactivitynavigation = theme_uonbi_get_setting('courseactivitynavigation');
+
+if ($courseactivitynavigation == 2) {
+    $PAGE->theme->usescourseindex = false;
+}
+
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();
 
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
-user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
-
 if (isloggedin()) {
-    $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
+    $navdraweropen = (get_user_preferences('drawer-open-nav') === true);
     $courseindexopen = (get_user_preferences('drawer-open-index') == true);
     $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
 } else {
@@ -44,7 +46,7 @@ if (isloggedin()) {
     $blockdraweropen = false;
 }
 
-if (defined('BEHAT_SITE_RUNNING')) {
+if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_closed') != 1) {
     $blockdraweropen = true;
     $navdraweropen = false;
 }
@@ -82,6 +84,13 @@ $haspagebtmblocks = (strpos($pagebtmblockshtml, 'data-block=') !== false || !emp
 if (!$hasblocks) {
     $blockdraweropen = false;
 }
+
+$coursebg = theme_uonbi_get_setting('coursebg');
+$coursebgshow = $coursebg == 2;
+if ($coursebgshow && $PAGE->pagelayout == 'course') {
+    $extraclasses[] = 'coursebg';
+}
+
 
 $courseindex = core_course_drawer();
 if (!$courseindex) {
@@ -191,7 +200,7 @@ $templatecontext = [
     'copyright' => $copyright,
     'social' => $social,
     'contacts' => $contacts,
-
+    'coursebgshow' => $coursebgshow,
     'bodyattributes' => $bodyattributes,
     'courseindex' => $courseindex,
     'courseindexopen' => $courseindexopen,
@@ -227,6 +236,12 @@ if (!empty($theme->settings->hamburgerpos)) {
 $templatecontext['hiddencoursealert'] = true;
 if (!empty($theme->settings->hiddencoursealert)) {
     $templatecontext['hiddencoursealert'] = false;
+}
+
+$loginbtn = theme_uonbi_get_setting('loginbtn');
+$loginbtnshow = $loginbtn == 2;
+if (!empty($loginbtnshow) && !isloggedin()) {
+    $templatecontext['loginbtn'] = true;
 }
 
 // Improve boost navigation.

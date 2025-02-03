@@ -48,7 +48,7 @@ require_once($CFG->libdir . '/filelib.php');
 global $PAGE;
 
 /**
- * University of Nairobi theme course renderer class
+ * UONBI theme course renderer class
  */
 
 class course_renderer extends \core_course_renderer {
@@ -150,7 +150,7 @@ class course_renderer extends \core_course_renderer {
                 </div>';
             if (count($rcourseids) > 0) {
                 foreach ($acourseids as $courseids) {
-                    $content .= '<div class="card-deck">';
+                    $content .= '<div class="card-grid mx-0 row row-cols-1 row-cols-sm-2 row-cols-lg-4">';
                     $rowcontent = '';
                     foreach ($courseids as $courseid) {
                         $course = get_course($courseid);
@@ -234,23 +234,21 @@ class course_renderer extends \core_course_renderer {
                         }
 
                         if (empty($imgurl)) {
-                            $imgurl = $this->output->image_url('default', 'theme_uonbi');
-                            if (!$imgurl) {
-                                $imgurl = $noimgurl;
-                            }
+                            $imgurl = $OUTPUT->get_generated_image_for_id($course->id);
                         }
 
                         $rowcontent .= html_writer::start_tag('div', array(
-                            'class' => $course->visible ? 'card courses-card mb-4 coursevisible' : 'card courses-card mb-4 coursedimmed'
+                            'class' => $course->visible ? 'card courses-card coursevisible' : 'card courses-card coursedimmed'
                         ));
 
                         $tooltiptext = 'data-tooltip="tooltip" data-placement= "top" title="' . format_string($course->fullname) . '"';
-                        
+
                         $theme = \theme_config::load('uonbi');
                         $coursecontacts = (!empty($theme->settings->coursecontacts)) ? $this->course_contacts($course) : '';
 
                         $rowcontent .= '
-                        <a ' . $tooltiptext . ' href="' . $courseurl . '">
+                        <div class="card-inner">
+                        <a ' . $tooltiptext . ' href="' . $courseurl . '" class="img-container" >
                         <div class="card-img-top myoverviewimg" style="background-image: url(' . $imgurl . ');background-repeat: no-repeat;background-size:cover; background-position:center;">
                             <div class="media">
                                  <div class="mr-2">
@@ -271,6 +269,7 @@ class course_renderer extends \core_course_renderer {
                         </div>
                         <div class="card-footer">
                             ' . $courseicons . '
+                        </div>
                         </div>
                         </div>';
                     }
@@ -423,14 +422,14 @@ class course_renderer extends \core_course_renderer {
     }
 
     public function uonbi_course_image($course, $classes) {
-        global $CFG;
+        global $CFG, $OUTPUT;
 
         if ($course instanceof \stdClass) {
             $course = new core_course_list_element($course);
         }
 
         // Display default course image if no course overview image is set.
-        $url = $this->output->image_url('default', 'theme_uonbi');
+        $url = $OUTPUT->get_generated_image_for_id($course->id);
         if (count($course->get_course_overviewfiles())) {
             // Use the first image saved in the course settings.
             foreach ($course->get_course_overviewfiles() as $file) {
@@ -473,10 +472,12 @@ class course_renderer extends \core_course_renderer {
         $urlparam = ['id' => $course->id];
 
         if ($pluginconfig->participants_button) {
-            $output .= html_writer::link(
-                new moodle_url('/user/index.php', $urlparam),
-                $this->output->pix_icon('i/cohort', get_string('participants')),
-                ['class' => 'btn btn-secondary link-participants']);
+            if (isloggedin()) {
+                $output .= html_writer::link(
+                    new moodle_url('/user/index.php', $urlparam),
+                    $this->output->pix_icon('i/cohort', get_string('participants')),
+                    ['class' => 'btn btn-secondary btn-sm link-participants']);
+            }
         }
 
         if ($pluginconfig->grades_button) {
@@ -485,24 +486,30 @@ class course_renderer extends \core_course_renderer {
             } else {
                 $urlgrades = new moodle_url('/grade/report/user/index.php', $urlparam);
             }
-            $output .= html_writer::link(
-                $urlgrades,
-                $this->output->pix_icon('i/grades', get_string('grades')),
-                ['class' => 'btn btn-secondary link-grades']);
+            if (isloggedin()) {
+                $output .= html_writer::link(
+                    $urlgrades,
+                    $this->output->pix_icon('i/grades', get_string('grades')),
+                    ['class' => 'btn btn-secondary btn-sm link-grades']);
+            }
         }
 
         if ($pluginconfig->badges_button && $CFG->enablebadges) {
-            $output .= html_writer::link(
-                new moodle_url('/badges/view.php?type=2', $urlparam),
-                $this->output->pix_icon('i/badge', get_string('badges')),
-                ['class' => 'btn btn-secondary link-badges']);
+            if (isloggedin()) {
+                $output .= html_writer::link(
+                    new moodle_url('/badges/index.php?type=2', $urlparam),
+                    $this->output->pix_icon('i/badge', get_string('badges')),
+                    ['class' => 'btn btn-secondary btn-sm link-badges']);
+            }
         }
 
         if ($pluginconfig->forums_button) {
-            $output .= html_writer::link(
-                new moodle_url('/mod/forum/index.php', $urlparam),
-                $this->output->pix_icon('t/unblock', get_string('forum', 'forum')),
-                ['class' => 'btn btn-secondary link-forums']);
+            if (isloggedin()) {
+                $output .= html_writer::link(
+                    new moodle_url('/mod/forum/index.php', $urlparam),
+                    $this->output->pix_icon('t/messages', get_string('forum', 'forum')),
+                    ['class' => 'btn btn-secondary btn-sm link-forums']);
+            }
         }
 
         if ($pluginconfig->settings_button) {
@@ -516,13 +523,12 @@ class course_renderer extends \core_course_renderer {
                     ];
                     $urlsettings = new moodle_url('/course/view.php', $params);
                     $iconhtml = $this->output->pix_icon('t/editinline', get_string('editon', 'theme_uonbi'));
-                    $classhtml = ['class' => 'btn btn-secondary link-settings-alt'];
+                    $classhtml = ['class' => 'btn btn-secondary btn-sm link-settings-alt'];
                 } else {
                     $urlsettings = new moodle_url('/course/edit.php', $urlparam);
                     $iconhtml = $this->output->pix_icon('a/setting', get_string('settings'));
-                    $classhtml = ['class' => 'btn btn-secondary link-settings'];
+                    $classhtml = ['class' => 'btn btn-secondary btn-sm link-settings'];
                 }
-
                 $output .= html_writer::link(
                     $urlsettings,
                     $iconhtml,
@@ -532,7 +538,7 @@ class course_renderer extends \core_course_renderer {
                 $output .= html_writer::link(
                     new moodle_url('/course/view.php', $urlparam),
                     $this->output->pix_icon('t/right', get_string('entercourse')),
-                    ['class' => 'btn btn-secondary link-course']);
+                    ['class' => 'btn btn-secondary btn-sm link-course']);
             }
         }
 

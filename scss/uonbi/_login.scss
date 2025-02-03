@@ -19,7 +19,7 @@
             }
             #region-main-box {
                 padding: 2rem;
-                margin: 5vw auto 0;
+                margin: auto;
                 max-width: 35rem;
                 .loginform {
                     .btn {
@@ -35,10 +35,13 @@
                             }
                         }
                     }
-                    .login-logo {
+                    #loginlogo {
                         text-align: center;
                         margin: 0;
-                        padding: 1.5rem 2rem;
+                        padding: 0;
+                        img {
+                            margin: auto !important;
+                        }
                     }
                     h2.login-heading {
                         font-size: 1.4rem;
@@ -46,12 +49,10 @@
                     }
                     .login-form {
                         margin-bottom: 1rem;
-                        border-bottom: 1px solid #ddd;
                     }
                     #guestlogin {
                         padding: 0 0 1rem;
                         margin-bottom: 1.5rem;
-                        border-bottom: 1px solid #ddd;
                     }
                 }
             }

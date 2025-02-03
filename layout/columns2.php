@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A two column layout for the University of Nairobi theme.
+ * A two column layout for the UONBI theme.
  *
  * @package   theme_uonbi
  * @copyright 2022 Catalyst IT Europe, www.catalyst-eu.net
@@ -24,14 +24,22 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
-
 require_once($CFG->libdir . '/behat/lib.php');
 
 if (isloggedin()) {
-    $navdraweropen = (get_user_preferences('drawer-open-nav', 'true') == 'true');
+    $navdraweropen = (get_user_preferences('drawer-open-nav') === true);
 } else {
     $navdraweropen = false;
+}
+
+if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_closed') != 1) {
+    $navdraweropen = false;
+}
+
+$courseactivitynavigation = theme_uonbi_get_setting('courseactivitynavigation');
+
+if ($courseactivitynavigation == 2) {
+    $PAGE->theme->usescourseindex = false;
 }
 
 // Add block button in editing mode.
@@ -70,11 +78,14 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
 $secondarynavigation = false;
-if (!defined('BEHAT_SITE_RUNNING')) {
-    $buildsecondarynavigation = $PAGE->has_secondary_navigation();
-    if ($buildsecondarynavigation) {
-        $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs');
-        $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+$overflow = '';
+if ($PAGE->has_secondary_navigation()) {
+    $tablistnav = $PAGE->has_tablist_secondary_navigation();
+    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+    $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+    $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
+    if (!is_null($overflowdata)) {
+        $overflow = $overflowdata->export_for_template($OUTPUT);
     }
 }
 
@@ -163,10 +174,15 @@ $templatecontext = [
     'addblockbutton' => $addblockbutton,
 ];
 
-
 $templatecontext['hamburgerpos'] = false;
 if (!empty($theme->settings->hamburgerpos)) {
     $templatecontext['hamburgerpos'] = true;
+}
+
+$loginbtn = theme_uonbi_get_setting('loginbtn');
+$loginbtnshow = $loginbtn == 2;
+if (!empty($loginbtnshow) && !isloggedin()) {
+    $templatecontext['loginbtn'] = true;
 }
 
 // Improve boost navigation.

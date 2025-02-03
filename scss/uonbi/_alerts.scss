@@ -18,7 +18,7 @@
 }
 .useralerts {
     width: 100%;
-    margin: 0 auto .1rem;
+    margin: 0 auto $spacer;
 
     .alertmessage {
         display: flex;
@@ -33,7 +33,7 @@
         .alerttext {
             font-size: 15px;
             .title {
-                display: inline-block;
+                display: block;
                 font-size: 16px;
                 font-weight: 600;
                 margin-right: 5px;
@@ -48,13 +48,13 @@
       margin: ($spacer * 1.5) auto 0;
     }
     .pagelayout-login & {
-      max-width: calc(100% - 30px);
+      max-width: calc(100% - 60px);
       
-      @media (min-width: $md) {
+      @media (min-width: $lg) {
         max-width: calc(100% - 60px);
       }
-      @media (min-width: $max-page-width) {
-        max-width: calc(80% - 60px);
+      @media (min-width: 1210px) {
+        max-width: 72rem;
       }
     }
 }

@@ -73,19 +73,51 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * Renders the "breadcrumb" for all pages in boost union.
+     * Try to return the first image on course summary files, otherwise returns a default image.
      *
-     * This renderer function is copied and modified from /theme/boost/classes/output/core_renderer.php
-     *
-     * @return string the HTML for the navbar.
+     * @return string HTML fragment.
      */
-    public function navbar(): string {
-        $newnav = new \theme_uonbi\boostnavbar($this->page);
-        return $this->render_from_template('core/navbar', $newnav);
+    public function courseheaderimage() {
+        global $CFG, $COURSE, $DB, $OUTPUT;
+
+        $course = $DB->get_record('course', ['id' => $COURSE->id]);
+
+        $course = new core_course_list_element($course);
+
+        $courseimage = '';
+        $imageindex = 1;
+        foreach ($course->get_course_overviewfiles() as $file) {
+            $isimage = $file->is_valid_image();
+
+            $isimage = $file->is_valid_image();
+            $url = file_encode_url("$CFG->wwwroot/pluginfile.php", '/' . $file->get_contextid() . '/' .
+            $file->get_component() . '/' . $file->get_filearea() . $file->get_filepath() . $file->get_filename() , !$isimage);
+            if (!$isimage) {
+                $imgurl = $noimgurl;
+            }
+
+            if ($isimage) {
+                $courseimage = $url;
+                $courseimagebg = 'class="courseimg" style="background-image: url(' . $courseimage . ')"';
+            }
+
+            if ($imageindex == 2) {
+                break;
+            }
+
+            $imageindex++;
+        }
+
+        if (empty($courseimage)) {
+            $courseimage = $OUTPUT->get_generated_image_for_id($course->id);
+            $courseimagebg = 'style="background-image: url(' . $courseimage . ')"';
+        }
+
+        return $courseimagebg;
     }
 
     /**
-     * Return University of Nairobi editing button.
+     * Return UONBI editing button.
      * @return string
      */
     public function editbutton() {
@@ -165,6 +197,70 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Gets the logo to be rendered.
+     *
+     * The priority of get log is: 1st try to get the theme logo, 2nd try to get the theme logo
+     * If no logo was found return false
+     *
+     * @return mixed
+     */
+    public function get_logo() {
+        if ($this->should_display_theme_logo()) {
+            return $this->get_theme_logo_url();
+        }
+
+        $url = $this->get_logo_url();
+        if ($url) {
+            return $url->out(false);
+        }
+
+        return false;
+    }
+
+    /**
+     * Gets the Login-page logo to be rendered.
+     *
+     * The priority of get logo is: 1st try to get the theme login page logo, 2nd try to get the theme logo
+     * If no logo was found return false
+     *
+     * @return mixed
+     */
+    public function get_logologin() {
+        if ($this->should_display_theme_logologin()) {
+            return $this->get_theme_logologin_url();
+        }
+
+        $url = $this->get_logo_url();
+        if ($url) {
+            return $url->out(false);
+        }
+
+        return false;
+    }
+
+    /**
+     * Whether we should display the main theme logo in the navbar.
+     *
+     * @return bool
+     */
+    public function should_display_theme_logo() {
+        $logo = $this->get_theme_logo_url();
+
+        return !empty($logo);
+    }
+
+    /**
+     * Whether we should display the main theme logo in the navbar.
+     *
+     * @return bool
+     */
+    public function should_display_theme_logologin() {
+        $logologin = $this->get_theme_logologin_url();
+
+        return !empty($logologin);
+    }
+
+    /**
      * Outputs the favicon urlbase.
      *
      * @return string an url
@@ -179,6 +275,28 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return parent::favicon();
+    }
+
+    /**
+     * Get the main logo URL.
+     *
+     * @return string
+     */
+    public function get_theme_logo_url() {
+        $theme = theme_config::load('uonbi');
+
+        return $theme->setting_file_url('logo', 'logo');
+    }
+
+    /**
+     * Get the Login-page logo URL.
+     *
+     * @return string
+     */
+    public function get_theme_logologin_url() {
+        $theme = theme_config::load('uonbi');
+
+        return $theme->setting_file_url('logologin', 'logologin');
     }
 
     /**
@@ -315,5 +433,15 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $content .= $this->render_from_template('core/custom_menu_item', $context);
         }
         return $content;
+    }
+
+    /**
+     * Renders the "breadcrumbs" for all pages in theme_uonbi.
+     *
+     * @return string the HTML for the navbar.
+     */
+    public function navbar(): string {
+        $newnav = new \theme_uonbi\boostnavbar($this->page);
+        return $this->render_from_template('core/navbar', $newnav);
     }
 }

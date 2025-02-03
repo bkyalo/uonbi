@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * An embedded layout for the University of Nairobi theme.
+ * An embedded layout for the UONBI theme.
  *
  * @package   theme_uonbi
  * @copyright 2022 Catalyst IT Europe, www.catalyst-eu.net

@@ -1,3 +1,6 @@
+.drawer {
+    background: $drawer-bg-color;
+}
 #nav-drawer {
     display: none;
     padding: 10px 5px;
@@ -6,6 +9,7 @@
     padding-bottom: 20px;
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: 1016;
     box-shadow: 0 0 20px rgb(0 0 0 / 5%);
 
     .local_envbar & {
@@ -41,20 +45,19 @@
             padding: 0;
             margin: 1px 0;
             background-color: transparent;
-            border-radius: $card-border-radius - 2;
+            border-radius: $border-radius;
             border: 0;
 
             .nav-link,
             .list-group-item,
             .list-group-item-action {
-                color: $nav-drawer-text-color;
+                color: rgba($nav-drawer-text-color, 85%);
                 padding: 12px 14px;
                 border: none;
                 text-decoration: none;
                 width: 100%;
-                opacity: .8;
                 background: transparent;
-                border-radius: $card-border-radius - 2;
+                border-radius: $border-radius;
 
                 .media {
                     display: block;
@@ -65,8 +68,7 @@
                 }
 
                 &.active {
-                    opacity: 1;
-                    color: $nav-drawer-text-color;
+                    color: $nav-drawer-active-color;
                     background: $navdrawerlink;
                     .font-weight-bold {
                         font-weight: normal !important;
@@ -81,58 +83,65 @@
                     display: inline-block !important;
 
                     .icon {
+                        margin-left: 1px;
                         margin-right: $spacer;
 
                         &:before {
-                            speak: none;
-                            font-family: "FontAwesome", "simple-line-icons";
-                            font-size: 130%;
-                            font-style: normal;
-                            font-weight: normal;
-                            font-variant: normal;
+                            font-size: 1.3rem;
                             text-transform: none;
                             line-height: 1;
                             vertical-align: sub;
                             -webkit-font-smoothing: antialiased;
                             -moz-osx-font-smoothing: grayscale;
                         }
-
                         &.fa-cog:before {
+                            font-family: "simple-line-icons";
                             content: "\e09a";
                         }
                         &.fa-star:before {
+                            font-family: "simple-line-icons";
                             content: "\e09b";
                         }
                         &.fa-dashboard:before {
+                            font-family: "simple-line-icons";
                             content: "\e007";
                         }
                         &.fa-pencil:before {
+                            font-family: "simple-line-icons";
                             content: "\e05f";
                         }
                         &.fa-folder:before,
                         &.fa-folder-open:before {
+                            font-family: "simple-line-icons";
                             content: "\e089";
                         }
                         &.fa-bell:before {
+                            font-family: "simple-line-icons";
                             content: "\e027";
                         }
                         &.fa-copy:before,
                         &.fa-files-o:before {
+                            font-family: "simple-line-icons";
                             content: "\e040";
                         }
                         &.fa-file:before {
+                            font-family: "simple-line-icons";
                             content: "\e085";
                         }
                         &.fa-home:before {
+                            font-family: "simple-line-icons";
                             content: "\e069";
                         }
                         &.fa-graduation-cap:before {
+                            font-family: "simple-line-icons";
                             content: "\e019";
                         }
                         &.fa-shield:before {
+                            font-family: "simple-line-icons";
                             content: "\e028";
                         }
                         &.fa-list:before {
+                            font-family: "simple-line-icons";
                             content: "\e067";
                         }
                     }
@@ -143,12 +152,11 @@
 
                 &:focus,
                 &:hover {
-                    opacity: 1;
-                    color: $nav-drawer-text-color;
+                    color: $nav-drawer-active-color;
                     background-color: $navdrawerlink;
 
                     .media-body {
-                        color: $nav-drawer-text-color;
+                        color: $nav-drawer-active-color;
                     }
                 }
 
@@ -205,14 +213,6 @@
                 border-top: none;
             }
         }
-        #page-course-edit &,
-        .pagelayout-course &,
-        .pagelayout-incourse:not(#page-course-info) & {
-            &[aria-label="Site"] {
-                position: relative;
-                border-top: 1px solid set-header-border-color($nav-drawer-bg);
-            }
-        }
     }
     .mobile-custom-menu {
         position: relative;
@@ -241,7 +241,7 @@
                     .dropdown-item {
                         display: block;
                         max-width: 100%;
-                        font-size: 1rem;
+                        font-size: $spacer;
                         white-space: normal;
                         color: rgba($nav-drawer-text-color, 85%);
                         padding: 10px 14px 10px 24px;
@@ -305,7 +305,9 @@
             .list-group-item,
             .list-group-item-action {
                 display: inherit;
-                width: 50px;
+                width: 100%;
+                margin: auto;
+                padding: 12px 10px;
 
                 &.active {
                     background: $navdrawerlink;
@@ -313,6 +315,12 @@
 
                 .media {
                     display: block;
+                    text-align: center;
+                    .media-left {
+                        .icon {
+                            margin: auto;
+                        }
+                    }
                 }
                 .media-body,
                 &.has-arrow:after,
@@ -332,10 +340,6 @@
                 &[data-parent-key^="localboostnavigationcustom"] > div {
                     margin-left: 0 !important;
                 }
-            }
-
-            &:hover {
-                width: 270px;
             }
 
             > ul {
@@ -491,18 +495,12 @@
 .drawer.drawer-left,
 .drawer.drawer-right {
     box-shadow: 0 0 20px rgb(0 0 0 / 5%);
-    .drawertoggle {
-        margin-left: auto;
-        margin-right: 5px;
-        order: 2;
-    }
     .drawercontent {
         padding: 0 $spacer $spacer;
     }
 }
 
 .drawer.drawer-left {
-    background: $white;
     @media (min-width: $lg) {
         &.show {
             left: $nav-drawer-closed;
@@ -517,7 +515,6 @@
     }
 }
 .drawer.drawer-right {
-    background: $white;
     .block >.card-body {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -542,13 +539,12 @@
 
         .courseindex-link,
         .courseindex-chevron {
-            color: $font-color;
+            color: $body-color;
         }
     }
 }
 
 #nav-drawer {
-    transition: ease-in-out 0.4s;
     &:before {
         content: "";
         display: block;
@@ -560,7 +556,6 @@
         background: $nav-drawer-bg;
     }
     &.closed {
-        transition: ease-in-out 0.4s;
         &:before {
             width: 0;
         }
@@ -584,7 +579,10 @@
         margin: auto;
         border-top: 1px solid set-header-border-color($nav-drawer-bg);
     }
+    [data-key="badgesview"],
+    [data-key="grades"],
     [data-key="competencies"],
+    [data-key="participants"],
     [aria-label="Add/Edit blocks"] {
         display: none !important;
     }

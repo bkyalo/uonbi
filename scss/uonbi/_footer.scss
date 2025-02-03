@@ -2,7 +2,7 @@
     position: relative;
     min-height: 80px;
     color: set-footer-text-color($footer-bg);
-    padding: ($spacer * 2) 0;
+    padding: ($spacer * 2) 0 ($spacer * 3);
     background: $footer-bg;
     flex-shrink: 0;
     transition: .4s;
@@ -37,18 +37,7 @@
             margin-bottom: ($spacer / 4);
         }
     }
-    .pagelayout-course &,
-    .pagelayout-incourse & {
-        &::before {
-            content: "";
-            width: $xl;
-            max-width: 100%;
-            display: block;
-            height: 1px;
-            margin: 0 auto 1rem;
-            border-top: 1px solid $gray-light;
-        }
-    }
+
     .drawers & {
         .container-fluid {
             max-width: $xl;
@@ -89,7 +78,7 @@
             @media (min-width: $md) {
                 padding-right: $spacer;
             }
-            @media (max-width: $xxl) {
+            @media (min-width: $max-page-width) {
                 padding-left: ($spacer * 4);
             }
             .drawer-open-left & {
@@ -125,6 +114,12 @@
         }
     }
 
+    .popover-body {
+        a {
+            color: inherit;
+        }
+    }
+
     .moodlehelp {
         .icon {
             display: none;
@@ -156,10 +151,16 @@
             }
         }
     }
-    .copyright {
-        text-align: right;
-    }
+
     .poweredbycatalyst {
+        pre {
+            font-size: .65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: .05rem;
+            color: set-footer-text-color($footer-bg);
+            margin: 0 0 .2rem;
+        }
         img {
             filter: set-footer-logo-color($footer-bg);
         }
@@ -168,40 +169,57 @@
     .social-media {
         ul {
             list-style: none;
-            text-align: right;
             padding: 0;
             margin: 0 0 $spacer;
 
             li {
                 display: inline-block;
-
-                + li {
-                    margin: ($spacer * 0.2) 0 0 ($spacer * 0.2);
-                }
+                margin: .5rem 0 0 .5rem;
 
                 a {
-                    font-size: 1.2rem;
-                    display: inline-block;
+                    font-size: 120%;
                     color: set-footer-text-color($footer-bg);
                     text-align: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     height: ($spacer * 2.7);
-                    width: ($spacer * 1.7);
+                    width: ($spacer * 2.7);
                     line-height: ($spacer * 2.5);
+                    border: 2px solid set-footer-border-color($footer-bg);
                     border-radius: 50%;
                     transition: 0.2s;
-
                     svg {
-                        filter: set-footer-logo-color($footer-bg);
+                        filter: set-footer-filter-color($footer-bg);
+                    }
+
+                    &:focus,
+                    &:hover {
+                        color: set-footer-text-color-hover($footer-bg);
+                        text-decoration: none;
+                        background-color: set-footer-text-color($footer-bg);
+                        border-color: set-footer-text-color($footer-bg);
+                        box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+                        svg {
+                            filter: set-footer-filter-color-hover($footer-bg);
+                        }
                     }
                 }
             }
         }
     }
+    .btn-footer-popover {
+        margin-right: -$spacer;
+        bottom: .5rem;
+        border: 1px solid $white;
+    }
 }
-@media (max-width: ($md - 1)) {
+@media (max-width: ($lg - 1)) {
     #page-footer {
         margin-left: 0;
         margin-right: 0;
+        padding-left: $spacer;
+        padding-right: $spacer;
         padding-bottom: $spacer * 2;
 
         #page-course-info & {
@@ -213,13 +231,9 @@
             padding: $spacer 0 0 !important;
         }
         .social-media {
-            float: none !important;
-
             ul {
-                text-align: left;
                 li,
                 li + li {
-                    float: none;
                     margin: ($spacer * 0.4) ($spacer * 0.2) 0 0;
                 }
             }

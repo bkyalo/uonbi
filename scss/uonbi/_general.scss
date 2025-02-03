@@ -41,7 +41,7 @@ body {
         &.drawer-open-left #page.drawers.show-drawer-right {
             margin-left: 60px;
             #topofscroll {
-                padding-right: 1rem !important;
+                padding-right: $spacer !important;
             }
         }
     }
@@ -50,9 +50,17 @@ body {
         margin: 0;
     }
 
+    &.path-report,
     &.pagelayout-popup,
-    &.pagelayout-embedded {
+    &.pagelayout-embedded,
+    &.pagelayout-report,
+    &.path-blocks-configurable_reports {
         background: $white;
+
+        #page-footer {
+            padding-top: ($spacer * 2);
+            border-top: 1px solid $border-color;
+        }
     }
 
     &.pagelayout-secure {
@@ -62,47 +70,37 @@ body {
     }
 
     // Assignment grader needs margin-top set to 0
-    &.pagelayout-embedded,
-    &.pagelayout-frontpage {
+    &.pagelayout-embedded {
         #page {
             margin-top: 0 !important;
         }
     }
-    &.pagelayout-frontpage {
-        background: $white !important;
-        #page-wrapper {
-            margin-top: calc(#{$navbar-height} + #{$navbar-border-height}) !important;
+
+    &#page-login-index {
+        #background_carousel {
+            position: fixed;
+            top: 0;
         }
-        #region-page-top {
-            min-height: 80vh;
-            background-size: cover;
-            background-attachment: fixed;
-            #block-region-page-top {
-                display: flex;
-                height: 100%;
-                align-items: center;
-                justify-content: center;
-                background: rgba(0,0,0,0.5);
-                .block {
-                    background: transparent;
-                    .content {
-                        h1, h2, h3, h4, h5, h6, p {
-                            font-weight: 800;
-                            color: $white;
-                        }
-                        h1 {
-                            font-size: 60px;
-                        }
-                    }
-                }
+        .col-md-12 {
+            max-width: 72rem;
+            margin: auto;
+        }
+        .logo {
+            max-width: 100%;
+            text-align: center;
+            padding: ($spacer * 2);
+            margin: 0 auto;
+            background: $loginlogo_bg;
+            border-radius: $card-border-radius;
+            img {
+                max-width: 100%;
+                max-height: 100px;
+                margin: 0 auto;
             }
-        }
-        hr {
-            background-image: -webkit-linear-gradient(left,transparent,#CCCCCC,transparent);
-            background-image: linear-gradient(to right,transparent,#CCCCCC,transparent);
-            height: 1px;
-            border: 0;
-            box-sizing: content-box;
+            @media (min-width: $md) {
+                max-width: calc(100% + 30px);
+                margin: 0 -15px;
+            }
         }
     }
 
@@ -146,10 +144,6 @@ body {
             }
         }
     }
-    &.pagelayout-course,
-    &.pagelayout-incourse {
-        background-color: $white;
-    }
 
     #region-main .mform:not(.unresponsive) .fitem {
         .fcheckbox > span {
@@ -172,30 +166,26 @@ body {
         }
     }
 
-    h1, .h1, h2, .h2 {
+    h1, .h1 {
         font-family: $headings-font-family;
-        font-weight: 300;
+        font-weight: 800;
     }
 
-    h3, h4, h5, h6,
-    .h3, .h4, .h5, .h6 {
-        font-weight: 400;
-        line-height: 1;
-    }
-
-    b, strong, .header, th {
+    h2, h3, h4, h5, h6,
+    .h2, .h3, .h4, .h5, .h6 {
         font-weight: $headings-font-weight;
+        line-height: 1.3;
     }
 
     @media (max-width: ($md - 1)) {
         margin: 0;
     }
-    &:not(#page-site-index):not(#page-login-index):not(.pagelayout-course):not(#page-maintenance-message) {
+    &:not(.uses-drawers):not(#page-site-index):not(#page-login-index):not(.pagelayout-course):not(#page-maintenance-message) {
         #page-content {
             #region-main-box {
                 #region-main {
-                    padding: $spacer;
                     background: $white;
+                    border-radius: $card-border-radius;
                     @media (max-width: ($md - 1)) {
                         padding: 0;
                     }
@@ -207,7 +197,7 @@ body {
 
 * {
   scrollbar-width: thick;
-  scrollbar-color: $gray-light $gray-lighter;
+  scrollbar-color: $gray-500 $gray-200;
 }
 
 *::-webkit-scrollbar {
@@ -215,13 +205,13 @@ body {
 }
 
 *::-webkit-scrollbar-track {
-  background: $gray-lighter;
+  background: $gray-200;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: $gray;
   border-radius: 20px;
-  border: 3px solid $gray-lighter;
+  border: 3px solid $gray-200;
 }
 
 small, .small {
@@ -236,28 +226,8 @@ small, .small {
     }
 }
 
-.form-group.row {
-    margin-right: 0;
-}
-
-.nav-tabs {
-    margin-bottom: ($spacer * 2);
-
-    .nav-item {
-        margin-right: 2px;
-        background: darken($gray-lightest, 1%);
-    }
-
-    &#dynamictabs-tabs {
-        padding-top: $spacer;
-    }
-}
-
-
-
 .btn {
     &:not(.nav-link):not(.dropdown-toggle) {
-        border-radius: ($border-radius * 2);
         transition: 0.4s;
         &:hover {
             @include btn-shadow;
@@ -269,6 +239,7 @@ small, .small {
                 box-shadow: none;
             }
         }
+        &.bulkEnable,
         &.bg-primary,
         &.btn-primary {
             color: set-primary-text-color($btn-primary-bg);
@@ -289,6 +260,9 @@ small, .small {
                 @include btn-shadow;
             }
         }
+        &[type="submit"] {
+            white-space: nowrap;
+        }
     }
     &.bg-secondary,
     &.btn-secondary {
@@ -296,12 +270,12 @@ small, .small {
     }
     &.bg-secondary:not(disabled):not(.disabled),
     &.btn-secondary:not(disabled):not(.disabled) {
-        color: set-primary-text-color($btn-primary-bg);
-        background: $btn-primary-bg;
-        border: $input-btn-border-width solid $btn-primary-border;
+        color: set-primary-text-color($btn-secondary-bg);
+        background: $btn-secondary-bg;
+        border: $input-btn-border-width solid $btn-secondary-border;
 
         &.text-primary {
-            color: set-primary-text-color($btn-primary-bg) !important;
+            color: set-primary-text-color($btn-secondary-bg) !important;
         }
 
         &.qnbutton {
@@ -311,19 +285,19 @@ small, .small {
         }
 
         .icon {
-            color: set-primary-text-color($btn-primary-bg);
+            color: set-primary-text-color($btn-secondary-bg);
         }
 
         &:hover {
-            border-color: darken($btn-primary-bg, 10%);
-            background-color: darken($btn-primary-bg, 10%);
+            border-color: darken($btn-secondary-bg, 10%);
+            background-color: darken($btn-secondary-bg, 10%);
             @include btn-shadow;
         }
     }
     &.btn-default:not(disabled):not(.disabled) {
         color: inherit;
         background: inherit;
-        border-radius: 20px;
+        border-radius: $border-radius;
 
         &:hover {
             color: $white;
@@ -357,16 +331,8 @@ small, .small {
         margin-bottom: $spacer / 2;
 
         &.btn-secondary {
-            border-radius: 50px;
-
-            &:hover {
-                border-color: darken($btn-primary-bg, 10%);
-                background-color: darken($btn-primary-bg, 10%);
-                @include btn-shadow;
-            }
-
             .icon {
-                color: $font-color;
+                color: $body-color;
                 margin: 0;
             }
         }
@@ -381,10 +347,41 @@ small, .small {
         }
     }
 }
+.btn-group {
+    [class*="btn-"],
+    [class^="btn-"] {
+        margin: 0 !important;
+        &[class*="fp-vb-"],
+        &[class^="fp-vb-"] {
+            border-radius: inherit;
+            &:first-child {
+                border-top-left-radius: $btn-border-radius-sm;
+                border-bottom-left-radius: $btn-border-radius-sm;
+            }
+            &:last-child {
+                border-top-right-radius: $btn-border-radius-sm;
+                border-bottom-right-radius: $btn-border-radius-sm;
+            }
+            &.checked {
+                border-color: darken($btn-secondary-bg, 10%);
+                background-color: darken($btn-secondary-bg, 10%);
+            }
+        }
+    }
+}
 .btn-toolbar {
     .btn-group {
-        .btn img {
-            filter: set-icon-image-color($btn-primary-bg);
+        .btn {
+            &.btn-primary {
+                img {
+                    filter: set-icon-image-color($btn-primary-bg);
+                }
+            }
+            &.btn-secondary {
+                img {
+                    filter: set-icon-image-color($btn-secondary-bg);
+                }
+            }
         }
     }
 }
@@ -396,7 +393,6 @@ small, .small {
         background-color: $primary;
     }
     &.label-warning {
-        color: $font-color;
         background-color: $warning;
     }
     &.label-success {
@@ -408,107 +404,25 @@ small, .small {
     &.label-danger {
         background-color: $danger;
     }
-    .pagelayout-frontpage & {
-        font-size: inherit;
+
+    &.label-default {
+        color: set-primary-text-color($gray-500);
+        background-color: $gray-500;
     }
 }
-.jumbotron {
-    &-default {
-        color: set-primary-text-color($secondary);
-        background-color: $secondary;
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            color: set-primary-text-color($primary);
-            margin-bottom: 2rem;
+
+.badge {
+    &.bg-secondary {
+        &.text-light, &.text-dark {
+            color: set-primary-text-color($btn-secondary-bg) !important;
+            background-color: $btn-secondary-bg !important;
         }
-        p {
-            font-size: 110%;
-            display: flex;
-            .fa-check {
-                font-size: 120%;
-                margin-right: 20px;
-            }
-        }
-    }
-    &-warning {
-        color: $font-color;
-        background-color: $warning;
-    }
-    &-success {
-        background-color: $success;
-    }
-    &-info {
-        background-color: $link-color;
-    }
-    &-danger {
-        background-color: $danger;
     }
 }
-.jumbotron {
-    &-default {
-        color: set-primary-text-color($secondary);
-        background-color: $secondary;
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            color: set-primary-text-color($primary);
-            margin-bottom: 2rem;
-        }
-        p {
-            font-size: 110%;
-            display: flex;
-            .fa-check {
-                font-size: 120%;
-                margin-right: 20px;
-            }
-        }
-    }
-    &-warning {
-        color: $font-color;
-        background-color: $warning;
-    }
-    &-success {
-        background-color: $success;
-    }
-    &-info {
-        background-color: $link-color;
-    }
-    &-danger {
-        background-color: $danger;
-    }
-}
+
 .cell .singlebutton {
     margin-left: 3px;
     margin-right: 3px;
-}
-.form-inline {
-    &[data-region="filtercompetencies"] {
-        .form-group {
-            button {
-                img[title="Search"].icon {
-                    display: none
-                }
-                &:after {
-                    font-family: "FontAwesome";
-                    font-size: 102%;
-                    content: "\f002";
-                    display: block;
-                    color: $white;
-                }
-            }
-        }
-    }
-    label {
-        display: inline;
-    }
-}
-@media screen and (min-width: $sm) {
-    .mform {
-        .form-inline {
-            .custom-select {
-                width: auto;
-            }
-        }
-    }
 }
 
 /**
@@ -521,11 +435,15 @@ small, .small {
         margin-left: $nav-drawer-closed;
 
         .notloggedin &,
+        .pagelayout-login &,
         .drawer-open-left &,
         .pagelayout-popup &,
         .pagelayout-embedded & {
             margin-left: 0;
         }
+    }
+    .coursebg.pagelayout-course & {
+        height: auto;
     }
 }
 
@@ -542,7 +460,8 @@ small, .small {
         padding-left: ($spacer * 2);
         padding-right: ($spacer * 2);
 
-        .notloggedin & {
+        .notloggedin &
+        .pagelayout-login & {
             max-width: $max-page-width;
         }
     }
@@ -551,10 +470,12 @@ small, .small {
         padding-left: $spacer;
         padding-right: $spacer;
     }
+
     &.drawers {
         max-width: inherit;
         padding-bottom: 0;
         height: auto !important;
+        height: inherit !important;
 
         @media (min-width: $md) {
             padding-left: 0 !important;
@@ -586,7 +507,7 @@ small, .small {
                 @media (min-width: $md) {
                     padding-right: $spacer;
                 }
-                @media (max-width: $xxl) {
+                @media (min-width: $max-page-width) {
                     padding-left: ($spacer * 4);
                 }
             }
@@ -622,6 +543,11 @@ small, .small {
                     }
                 }
             }
+        }
+
+        #user-notifications {
+            max-width: calc(100% - 2rem);
+            margin: auto;
         }
 
         #page-course-info & {
@@ -665,7 +591,7 @@ small, .small {
                             .course-summary-summary-button {
                                 flex-basis: 100%;
                                 max-width: 100%;
-                                padding-top: 1rem;
+                                padding-top: $spacer;
                             }
                         }
                     }
@@ -677,7 +603,7 @@ small, .small {
                             .course-summary-summary-button {
                                 flex-basis: 100%;
                                 max-width: 100%;
-                                padding-top: 1rem;
+                                padding-top: $spacer;
                             }
                         }
                     }
@@ -695,6 +621,14 @@ small, .small {
                 }
             }
         }
+    }
+
+    #page-login-index & {
+        min-height: 70vh;
+        padding: 0;
+        margin-top: $spacer !important;
+        background: transparent;
+        background-image: none;
     }
 
     #page-site-index & {
@@ -738,10 +672,7 @@ small, .small {
             z-index: 100;
 
             h2 {
-                font-size: $h1-font-size;
-                font-weight: 300;
-                margin-top: 0 !important;
-                margin-bottom: 1.5rem !important;
+                font-weight: 800;
             }
         }
         #page-content {
@@ -778,10 +709,6 @@ small, .small {
         margin-top: 0;
         margin-bottom: 0;
         background: transparent;
-
-        #region-main {
-            padding-top: $spacer;
-        }
 
         #page-course-info & {
             max-width: 100%;
@@ -822,6 +749,9 @@ small, .small {
                 margin-bottom: ($spacer * 1.5);
             }
         }
+        .coursebg & {
+            margin-bottom: $spacer;
+        }
 
         &.header-maxwidth {
             @media (max-width: ($lg - 1)) {
@@ -835,28 +765,14 @@ small, .small {
             display: flex;
             align-items: center;
             overflow: inherit;
-            padding: 0 0 ($spacer * 1.5);
+            padding: 0 0 ($spacer * 1);
 
             .page-header-image {
-                margin-right: .8rem !important;
-
-                .aabtn {
-                    border: 1px solid $gray-border;
-                    border-radius: 50%;
-                    background: $white;
-                }
-
                 .userinitials {
                     font-size: $h4-font-size;
                     font-weight: normal;
                     margin: 0;
                     background: transparent;
-                }
-                .pagelayout-mypublic & {
-                    border-radius: 50%;
-                    background-color: $gray-border;
-                    border: 3px solid $white;
-                    @include btn-shadow;
                 }
 
                 .pagelayout-course &,
@@ -865,13 +781,13 @@ small, .small {
                 }
             }
             .page-header-headings {
+                background: transparent;
                 .text-muted {
                     display: none;
                     opacity: .7;
                     color: set-primary-text-color($body-bg) !important;
                 }
                 h1 {
-                    color: $headings-color;
                     margin: 0;
                 }
             }
@@ -893,7 +809,7 @@ small, .small {
         }
         h1 {
             font-size: $h1-font-size;
-            font-weight: 300;
+            font-weight: 800;
             margin-bottom: $spacer;
         }
         .singlebutton {
@@ -913,14 +829,8 @@ small, .small {
                 border: none;
 
                 .breadcrumb-item {
-                    display: flex;
-                    align-items: center;
+                    font-size: .95rem;
                     padding: 0 ($spacer / 2) $spacer 0;
-
-                    &::before {
-                        font-size: 80%;
-                        color: $link-color;
-                    }
 
                     @media (max-width: ($md - 1)) {
                         display: none;
@@ -953,8 +863,6 @@ small, .small {
         }
 
         .header-actions-container {
-            margin-top: 0;
-
             .simplesearchform {
                 min-width: 15rem;
             }
@@ -971,41 +879,16 @@ small, .small {
         }
 
         .page-context-header {
+            margin-top: $spacer;
             .uses-drawers & {
                 padding: 0;
             }
-        }
-
-        .editbutton {
-            margin: 0 5px;
-
-            .btn.btn-secondary {
-                padding: 8px 7px 7px;
-                background: $white;
-                border-radius: 6px;
-
-                &:focus,
-                &:hover {
-                    border-color: $primary;
-                    background: $primary;
-
-                    .fa-fw {
-                        color: $white;
-                    }
-                }
-
-                .fa-fw {
-                    font-size: 24px;
-                    margin: 3px;
-                }
-
-                &.active {
-                    border-color: $primary !important;
-                    background: $primary !important;
-
-                    .fa-fw {
-                        color: $white;
-                    }
+            .pagelayout-mydashboard & {
+                margin-top: 0;
+            }
+            @media (min-width: $sm) and (max-width: ($md - 1)) {
+                .coursebg & {
+                    max-width: 100%;
                 }
             }
         }
@@ -1028,7 +911,7 @@ small, .small {
                 display: block;
                 color: set-primary-text-color($primary);
                 padding: 5px 5px 4px 6px;
-                border-radius: 6px;
+                border-radius: $border-radius;
                 background: $primary;
                 transition: 0.2s;
 
@@ -1055,8 +938,14 @@ small, .small {
                 }
             }
         }
+        .coursebg & {
+            .context-header-settings-menu {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
         @media (min-width: $sm) and (max-width: ($md - 1)) {
-            .editbutton,
             .context-header-settings-menu {
                 display: block;
                 right: 0 !important;
@@ -1070,16 +959,12 @@ small, .small {
                     }
                 }
             }
-            .editbutton {
-                top: 0 !important;
-            }
         }
         @media screen and (max-width: ($sm - 1)) {
             h1 {
                 font-size: $h3-font-size;
                 margin-top: $spacer;
             }
-            .editbutton,
             .context-header-settings-menu {
                 right: 0;
 
@@ -1088,15 +973,24 @@ small, .small {
                     font-size: 22px !important;
                 }
             }
-            .editbutton {
-                margin-right: 5px;
-                right: 55px;
-            }
             .mr-auto {
                 min-width: auto;
                 max-width: 100%;
                 .pagelayout-course & {
                     margin-top: 0;
+                }
+            }
+            .coursebg & {
+                .mr-auto {
+                    padding-top: $spacer !important;
+                    margin-top: 0;
+
+                    h1 {
+                        margin-top: 0;
+                    }
+                }
+                .context-header-settings-menu {
+                    top: 0;
                 }
             }
         }
@@ -1106,16 +1000,23 @@ small, .small {
         #region-main-box {
             width: 100%;
             #region-main {
+                padding: $spacer 0;
                 margin: auto auto $spacer;
                 border: none;
                 background: $white;
+                border-radius: 0 0 $card-border-radius $card-border-radius;
 
                 #page-course-info & {
                     max-width: $xl;
                 }
 
+                .pagelayout-mydashboard & {
+                    padding: 0;
+                }
+
                 .notloggedin &,
-                #page-site-index & {
+                #page-site-index &,
+                #page-login-index & {
                     padding: 0;
                     background-color: transparent;
 
@@ -1127,7 +1028,12 @@ small, .small {
                     #frontpage-category-names,
                     #frontpage-available-course-list {
                         padding: $spacer;
-                        background-color: $white;
+                        background: $card-bg;
+                        border-radius: $card-border-radius;
+                        > h2 {
+                            font-size: $h3-font-size;
+                            margin-bottom: 1.5rem;
+                        }
                     }
                     #frontpage-available-course-list {
                         margin-top: 0;
@@ -1154,29 +1060,18 @@ small, .small {
                 .pagelayout-embedded & {
                     padding: 0 !important;
                 }
-                .pagelayout-mydashboard & {
-                    padding: 0 !important;
-                    background: transparent !important;
-                }
             }
 
             div[role="main"] {
-                padding: 0;
-                @media (max-width: ($md - 1)) {
-                    padding: $spacer;
-                }
-
-                .pagelayout-course &,
-                .pagelayout-incourse & {
-                    padding: $spacer;
+                padding: 0 $spacer;
+                .pagelayout-frontpage &,
+                .pagelayout-mydashboard & {
+                    padding: 0;
                 }
             }
-            #block-region-side-pre {
-                @media (max-width: ($md - 1)) {
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-            }
+        }
+        #page-login-index & {
+            margin: 0;
         }
     }
     @media (max-width: ($md - 1)) {
@@ -1187,6 +1082,10 @@ small, .small {
 
         #page-navbar {
             padding-top: 0 !important;
+
+            .coursebg & {
+                padding-top: $spacer !important;
+            }
         }
         .page-context-header {
             .page-header-headings {
@@ -1202,7 +1101,10 @@ small, .small {
 
 .card {
     &:not(.courses-card):not(.loginpanel):not(.node_category) {
-        border-color: $gray-border;
+        border-color: $border-color;
+    }
+    .dashboard-card {
+        max-width: 300px;
     }
 
     #page-header & {
@@ -1225,27 +1127,42 @@ small, .small {
  * Cards (Decks).
  */
 
-.card-deck {
-    margin-top: $spacer;
+.card-grid,
+.card-deck,
+.card-carousel {
     &.one-row {
         margin-left: 0;
         margin-right: 0;
     }
     .card {
+        &.course-card,
         &.courses-card {
             flex: 0;
-            flex-basis: 48%;
-            margin: 0 .5% ($spacer * 2);
-            border-color: $gray-border;
+            flex-basis: 100%;
+            margin: 0 1% ($spacer * 1.5);
+            border-color: $border-color;
             box-shadow: 0 0 7px rgba(0,0,0,0.17);
+            .card-inner {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                min-height: 200px;
+                .img-container, .card-body, .card-footer {
+                    width: 100%;
+                }
+            }
+
+            @media screen and (min-width: $sm) {
+                flex-basis: 48%;
+            }
 
             @media screen and (min-width: $lg) {
-                flex-basis: 32%;
+                flex-basis: 23%;
             }
 
             @media screen and (min-width: $max-page-width) {
-                flex-basis: 24%;
-
                 #side-pre &,
                 #region-page-btm & {
                     flex-basis: 100%;
@@ -1275,6 +1192,7 @@ small, .small {
                 width: 100%;
                 height: 150px;
                 opacity: .45;
+                border-radius: $card-border-radius;
                 background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 100%);
                 background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.45) 100%);
                 background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.45) 100%);
@@ -1282,7 +1200,11 @@ small, .small {
         }
         .card-body {
             clear: both;
-            padding: $spacer;
+            padding: .6rem;
+
+            &.course-info-container {
+                color: $body-color;
+            }
 
             h4.h5,
             .card-title {
@@ -1291,7 +1213,7 @@ small, .small {
 
                 a {
                     font-weight: 600;
-                    color: $font-color;
+                    color: $link-color;
                 }
             }
 
@@ -1328,7 +1250,7 @@ small, .small {
                 }
             }
 
-            &.dashboard-card-footer {
+            &.course-card-footer {
                 opacity: 1;
                 padding: 0 0 ($spacer / 2);
                 &.menu {
@@ -1339,117 +1261,52 @@ small, .small {
         &.coursedimmed {
             opacity: 0.6;
         }
-        &.dashboard-card {
+        &.course-card {
             flex-basis: 48%;
-            margin: 0 .5% ($spacer * 2);
             border: 1px solid rgba(0,0,0,.125);
             -webkit-box-shadow: 0 0 7px rgba(0,0,0,.17);
             box-shadow: 0 0 7px rgba(0,0,0,.17);
-
-            @media (min-width: $lg) {
-                flex-basis: 32.3%;
-            }
-            @media (min-width: $max-page-width) {
-                flex-basis: 24%;
-            }
-
-            body:not(.uses-drawers).drawer-open-left & {
-                @media (min-width: $lg) {
-                    flex-basis: 48%;
-                }
-                @media (min-width: $max-page-width) {
-                    flex-basis: 31.3%;
-                }
-            }
-
-            .categoryname {
-                display: block;
-                font-size: 14px;
-            }
-            .coursename {
-                display: block;
-            }
         }
         #block-region-side-pre & {
             &.courses-card,
-            &.dashboard-card {
+            &.course-card {
                 flex-basis: calc(100% - 1%) !important;
+                max-width: calc(100% - 1%) !important;
+                margin-bottom: $spacer;
             }
         }
         .summary-icons {
-            display: table;
-            width: 100%;
-            border-top: 1px solid $gray-border;
-
+            display: flex;
             .btn {
-                display: table-cell;
-                text-align: center;
-                padding: .7rem 0;
+                display: flex;
+                flex-basis: 100%;
+                justify-content: center;
+                margin: 0;
+                padding: .6rem 0;
                 border: none;
-                border-radius: 0 !important;
-                border-right: 1px solid $gray-border !important;
+                border-radius: 0;
+                border-top: 1px solid $border-color;
+                border-right: 1px solid $border-color;
                 background: transparent;
 
+                &:first-of-type {
+                    border-bottom-left-radius: calc(#{$card-border-radius} - 2px);
+                }
+
                 &:last-of-type {
-                    border: none !important;
+                    border-right: none;
+                    border-bottom-right-radius: calc(#{$card-border-radius} - 2px);
                 }
 
                 .icon {
                     display: block;
-                    font-size: 1.4rem;
+                    font-size: 1.3rem;
                     color: $primary;
                     width: inherit;
                     height: inherit;
                     margin: 0;
                     padding: 0;
                     transition: .4s;
-                }
-                &.link-grades,
-                &.link-badges,
-                &.link-course,
-                &.link-participants,
-                &.link-settings {
-
-                    .icon {
-                        &:before {
-                            font-family: "simple-line-icons";
-                        }
-                    }
-                }
-                &.link-grades {
-                    .icon {
-                        &:before {
-                            content: "\e04c";
-                        }
-                    }
-                }
-                &.link-badges {
-                    .icon {
-                        &:before {
-                            content: "\e028";
-                        }
-                    }
-                }
-                &.link-participants {
-                    .icon {
-                        &:before {
-                            content: "\e001";
-                        }
-                    }
-                }
-                &.link-settings {
-                    .icon {
-                        &:before {
-                            content: "\e09a";
-                        }
-                    }
-                }
-                &.link-course {
-                    .icon {
-                        &:before {
-                            content: "\e079";
-                        }
-                    }
                 }
                 &:focus,
                 &:hover {
@@ -1462,6 +1319,41 @@ small, .small {
                 }
             }
         }
+    }
+    .col,
+    &:not(.card-grid) .course-card {
+        margin: 0 .5% $spacer;
+        @media (min-width: $sm) {
+            flex-basis: 48%;
+            max-width: 48%;
+        }
+        @media (min-width: $lg) {
+            flex-basis: 32.3%;
+            max-width: 32.3%;
+        }
+        @media (min-width: $max-page-width) {
+            flex-basis: 24%;
+            max-width: 24%;
+        }
+        body:not(.uses-drawers).drawer-open-left & {
+            @media (min-width: $lg) {
+                flex-basis: 48%;
+                max-width: 48%;
+            }
+            @media (min-width: $max-page-width) {
+                flex-basis: 24%;
+                max-width: 24%;
+            }
+        }
+        #block-region-side-pre & {
+            flex-basis: 99%;
+            max-width: 99%;
+        }
+    }
+}
+.card-carousel {
+    .card.dashboard-card {
+        margin: 0 1% $spacer;
     }
 }
 .text-primary {
@@ -1501,7 +1393,7 @@ small, .small {
         height: $progress-circle-size;
         width: $progress-circle-size;
         background-clip: padding-box;
-        background-color: rgba(255,255,255,.9);
+        background-color: rgba(255,255,255,.8);
         border: 5px solid $white;
         border-radius: 50%;
         box-shadow: 0 0 25px rgba(0,0,0,0.5);
@@ -1512,12 +1404,12 @@ small, .small {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: $font-color;
+            color: $body-color;
             font-weight: 600;
             font-size: 1.1rem;
 
             &.has-percent {
-                color: $font-color;
+                color: $body-color;
             }
         }
         .progress-indicator {
@@ -1552,7 +1444,7 @@ small, .small {
         width: 100px;
         background-color: $white;
         border-radius: 50%;
-        border: 10px solid $gray-lighter;
+        border: 10px solid $gray-200;
         position: relative;
         box-shadow: 0 0 25px rgba(0,0,0,0.5);
 
@@ -1564,7 +1456,7 @@ small, .small {
             margin: 0;
             padding: 0;
             transform: translate(-45%, -45%);
-            color: darken($gray-lighter, 10%);
+            color: darken($gray-200, 10%);
             height: 50px;
             width: 50px;
             font-size: 45px;
@@ -1585,7 +1477,7 @@ small, .small {
     }
     .modal-title {
         font-size: $h5-font-size;
-        color: $font-color;
+        color: $body-color;
         background-color: inherit;
     }
 }
@@ -1594,8 +1486,8 @@ small, .small {
         .moodle-dialogue-hd {
             &.yui3-widget-hd {
                 font-size: $h5-font-size;
-                color: $font-color;
-                background-color: $gray-lightest;
+                color: $body-color;
+                background-color: $gray-100;
             }
         }
     }
@@ -1619,7 +1511,7 @@ small, .small {
         min-height: calc(100% - 3.5rem);
 
         .modal-content {
-            border-radius: 10px;
+            border-radius: $border-radius;
             border: 10px solid rgba($primary, .6);
             .modal-body {
                 padding: 1.5
@@ -1681,7 +1573,7 @@ small, .small {
             color: $primary;
             text-align: center;
             min-width: 36px;
-            padding: 6px 12px;
+            padding: 10px 12px;
             border-color: $primary;
         }
         &.active {
@@ -1702,29 +1594,35 @@ small, .small {
 *** General Tabs
 **/
 .nav-tabs {
-    border-color: $btn-primary-bg;
+    border-color: $link-color;
+    margin-bottom: ($spacer * 2);
+
+    &#dynamictabs-tabs {
+        padding-top: $spacer;
+    }
 
     .nav-item {
+        margin-right: 2px;
         margin-bottom: 0;
-        background-color: darken($gray-lightest, 1%);
-        border-radius: ($card-border-radius - 1) ($card-border-radius - 1) 0 0;
+        background-color: darken($gray-100, 1%);
+        border-radius: $border-radius $border-radius 0 0;
 
         &.nav-link {
-            border-radius: ($card-border-radius - 1) ($card-border-radius - 1) 0 0;
+            border-radius: $border-radius $border-radius 0 0;
             transition: 0.4s;
 
             &:focus,
             &:hover {
                 color: set-primary-text-color($btn-primary-bg);
-                border-bottom-color: $btn-primary-bg;
-                background-color: $btn-primary-bg;
+                border-bottom-color: $link-color;
+                background-color: $link-color;
             }
         }
         &.show .nav-link,
         .nav-link.active {
             padding-bottom: 9px;
             margin-bottom: -1px;
-            border-color: $btn-primary-bg;
+            border-color: $link-color;
             border-bottom-color: $white;
             background-color: $white;
 
@@ -1751,6 +1649,7 @@ small, .small {
         line-height: 1.4;
         padding: 0.3rem 1.3rem;
         white-space: normal;
+        align-items: center;
         &.hidden {
             display: none;
         }
@@ -1758,9 +1657,9 @@ small, .small {
         &:hover,
         &:focus,
         &:focus-within {
-            color: $font-color;
+            color: $body-color !important;
             text-decoration: underline;
-            background-color: $gray-lighter;
+            background-color: $gray-200;
         }
     }
 }
@@ -1806,7 +1705,7 @@ small, .small {
                 font-size: $h5-font-size;
                 font-weight: 400;
                 margin-bottom:  $spacer - .25;
-                border-bottom: 1px solid $gray-border;
+                border-bottom: 1px solid $border-color;
             }
         }
         .editprofile {
@@ -1815,7 +1714,7 @@ small, .small {
             color: set-primary-text-color($btn-primary-bg);
             padding: 6px ($spacer * 3);
             margin: 0 auto $spacer;
-            border-radius: 50px;
+            border-radius: $border-radius-lg;
             transition: 0.4s;
             background: $btn-primary-bg;
             border: $input-btn-border-width solid $btn-primary-border;
@@ -1846,7 +1745,7 @@ table {
 }
 #questionscontainer {
     overflow: auto;
-    margin: 1rem 0;
+    margin: $spacer 0;
 }
 .img-responsive {
     max-width: 100%;
@@ -1872,14 +1771,14 @@ table {
 
 .form-filemanager {
     .fp-content {
-        border: 1px solid $gray-border;
-        background: $gray-lightest;
+        border: 1px solid $border-color;
+        background: $gray-100;
 
         .fp-thumbnail {
             background: $white;
 
             img {
-                background: $gray-lighter;
+                background: $gray-200;
             }
         }
     }
@@ -1888,15 +1787,329 @@ table {
 /**
  * Grade report.
  */
+
+#page-mod-assign-grader {
+    .icon {
+        font-size: $spacer;
+        margin-left: .2rem;
+        margin-right: .2rem;
+    }
+    [data-region="grading-navigation"] {
+        h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+    }
+}
+
+#page-mod-assign-grader {
+    #page {
+        [data-region="assignment-info"] {
+            font-size: .9rem;
+        }
+        [data-region="user-info"] {
+            margin: auto;
+        }
+        [data-region="user-selector"] {
+            .alignment {
+                margin-top: 0;
+            }
+        }
+        [data-region="grade-panel"] {
+            padding: 0;
+            background: $white;
+            h3 {
+                font-size: $h5-font-size;
+                font-weight: 600;
+                color: $headings-color;
+            }
+            .gradingform {
+                padding: 0 !important;
+            }
+            fieldset {
+                .ftoggler {
+                    font-weight: 600;
+                    padding: 0;
+                }
+                .fcontainer {
+                    padding: 0;
+                }
+                &#id_gradeheader {
+                    padding: 2rem 5%;
+                    border-bottom: 2px solid $border-color;
+                }
+            }
+            #fitem_id_advancedgrading {
+                &.popout {
+                    padding: 0;
+                    .col-form-label {
+                        padding: 1rem;
+                    }
+                    .flex-wrap {
+                        padding: 1rem;
+                    }
+                }
+            }
+            #id_attemptsettings,
+            .submissionstatustable {
+                margin: 2rem 5% 0;
+                .fitem:last-of-type .felement {
+                    border: none;
+                }
+            }
+            #id_attemptsettings {
+                .fitem {
+                    display: flex;
+                    align-items: center;
+                    padding: 0 0 $spacer;
+                    border: none !important;
+                    .fitemtitle {
+                        margin: 0;
+                        border: none;
+                    }
+                    @media (max-width: 1600px) {
+                        flex-wrap: wrap;
+                    }
+                }
+            }
+            .submissionstatustable {
+                h3 {
+                    padding-bottom: 7.5px;
+                    margin-bottom: $spacer;
+                    border-bottom: 2px solid $border-color;
+                }
+                .submissionstatus,
+                .submissionstatusdraft,
+                .submissionstatussubmitted {
+                    display: inline-flex;
+                    align-items: center;
+                    font-size: 14px;
+                    height: 42px;
+                    padding: 0 25px 0 25px;
+                    margin: 0 0 $spacer;
+                    border-radius: $border-radius-lg;
+                    border: 1px solid $border-color;
+                    background-color: $gray-200;
+                    &:before {
+                        font-family: "FontAwesome";
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: $body-color;
+                        margin-left: 5px;
+                        margin-right: 5px;
+                        vertical-align: top;
+                    }
+                }
+                .submissionstatusdraft {
+                    padding-left: 10px;
+                    border: 1px solid #f4ac2e;
+                    background-color: #fcf2e0;
+                    &:before {
+                        font-weight: 400;
+                        color: #f4ac2e;
+                        content: "\f017";
+                    }
+                }
+                .submissionstatussubmitted {
+                    margin-bottom: 2rem;
+                    padding-left: 10px;
+                    border: 1px solid #a0c400;
+                    background-color: #f1f7dc;
+                    &:before {
+                        color: #a0c400;
+                        content: "\f00c";
+                    }
+                }
+                .timeremaining,
+                .submissiongraded,
+                .submissionnotgraded {
+                    margin: 0;
+                    background: transparent;
+                    &:before {
+                        display: inline-block;
+                        font-weight: 600;
+                        color: $body-color;
+                        content: "Marked Workflow State - ";
+                        margin-right: 5px;
+                    }
+                }
+                .timeremaining {
+                    &:before {
+                        content: "Deadline - ";
+                    }
+                }
+                .assignsubmission_file {
+                    font-size: .9rem;
+                    padding: 0;
+                    margin: $spacer 0;
+                    border: none;
+                    border-radius: $border-radius;
+                    background-color: $gray-100;
+                    .fileuploadsubmissiontime {
+                        float: none;
+                        font-size: .8rem;
+                        font-style: italic;
+                    }
+                }
+                .comment-area {
+                    max-width: 100%;
+                    font-size: .9rem;
+                    textarea {
+                        min-height: 100px;
+                    }
+                }
+            }
+            .col-form-label {
+                font-weight: bold;
+            }
+        }
+        .mform {
+            .fitem {
+                margin: 0 auto !important;
+                padding: 1rem 0;
+                border-radius: 0;
+                border-top: 2px solid $border-color !important;
+
+                &.fitem_feditor,
+                &.fitem_fgrading {
+                    border: none;
+                }
+                .felement {
+                    padding: 0;
+                }
+                .fitemtitle {
+                    label,
+                    .fstaticlabel {
+                        font-weight: 600;
+                        padding: 0;
+                    }
+                }
+                &.has-popout {
+                    border: none;
+                }
+            }
+            &:not(.unresponsive) {
+                .fitem {
+                    .fitemtitle {
+                        padding: 0;
+                        margin-bottom: $spacer;
+                        border: none;
+                        box-shadow: none;
+                        label {
+                            box-shadow: none;
+                            border: none;
+                            padding: 0;
+                        }
+                        &.fitem_fgrading .fitemtitle {
+                            display: none;
+                        }
+                        &.fitem_feditor .felement {
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+        [data-region="attempt-chooser"] {
+            display: block;
+            margin: 0 5% 2rem;
+        }
+    }
+    #rubric-advancedgrading {
+        width: 100%;
+        table#advancedgrading-criteria {
+            width: 100%;
+            flex-direction: column;
+            tbody, .criterion {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                flex-basis: 100%;
+                .fitemtitle {
+                    padding: 0;
+                    margin-bottom: $spacer;
+                }
+            }
+            .criterion {
+                padding-top: 1rem;
+                padding-bottom: 0;
+                margin-bottom: 1rem;
+                border: none;
+                border-top: 1px solid $border-color;
+                .description {
+                    font-weight: bold;
+                    width: 100%;
+                    max-width: 100%;
+                    margin-bottom: $spacer;
+                    background: transparent;
+                }
+                .levels tr {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                .level {
+                    max-width: 100%;
+                    font-size: .95rem;
+                    line-height: 1.5;
+                    margin-bottom: 1rem;
+                    border: none;
+                    background: transparent !important;
+                    .level-wrapper {
+                        border: 1px solid #555;
+                        padding: .5rem;
+                        border: 1px solid $gray-500;
+                        border-radius: $btn-border-radius;
+                        height: 100%;
+                    }
+                    &.checked {
+                        .level-wrapper {
+                            color: set-primary-text-color($btn-primary-bg);
+                            border-color: $btn-primary-border;
+                            background: $btn-primary-bg;
+                            .score {
+                                color: set-primary-text-color($btn-primary-bg);
+                            }
+                        }
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        .level-wrapper {
+                            box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+                        }
+                    }
+                }
+                }
+                .remark {
+                    padding: 0;
+                    background: transparent;
+                    textarea {
+                        min-width: 100%;
+                        color: $body-color;
+                        padding: .6rem;
+                        border-color: $gray-500;
+                        border-radius: $border-radius $border-radius 0 $border-radius;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .path-grade-report-grader {
+    #region-main {
+        h2 {
+            font-size: $h4-font-size;
+            margin-bottom: $spacer;
+        }
+        h3 {
+            font-size: $h5-font-size;
+            margin-bottom: 1.5rem;
+        }
+    }
     @media (min-width: $md) {
         .gradeparent {
             max-width: 100%;
-            overflow: auto;
-            .cell.c0 {
-                position: sticky;
-                left: 0;
-            }
         }
     }
 }
@@ -1923,7 +2136,7 @@ table {
 /**
  * Block drawer.
  */
- .drawer-left,
+.drawer-left,
 .drawer-right {
     @media (min-width: $md) {
         top: $navbar-height + $navbar-border-height;
@@ -1943,7 +2156,6 @@ table {
             }
         }
         .btn {
-            color: $primary;
             box-shadow: 0 4px 9px rgba(0,0,0,.07);
             cursor: pointer;
             min-width: 45px;
@@ -1960,14 +2172,14 @@ table {
         }
         &.drawer-left-toggle .btn {
             border-left: none;
-            border-radius: 0 4px 4px 0 !important;
+            border-radius: 0 $border-radius $border-radius 0 !important;
             &:hover {
                 padding-left: 20px;
             }
         }
         &.drawer-right-toggle .btn {
             border-right: none;
-            border-radius: 4px 0 0 4px !important;
+            border-radius: $border-radius 0 0 $border-radius !important;
             &:hover {
                 padding-right: 20px;
             }
@@ -1986,20 +2198,45 @@ table {
     height: 65px;
 }
 
-.box,
-.block {
+#page-content {
     .simplesearchform {
+        width: 70%;
+        min-width: 20rem;
+        max-width: 70%;
+        margin: 0 auto;
         form.simplesearchform {
-            margin: 1rem auto;
+            padding: 0;
+            margin: auto;
             justify-content: center;
+            .pagelayout-standard &,
+            .pagelayout-mycourses &,
+            .pagelayout-frontpage & {
+                margin: 1.5rem auto;
+            }
             .input-group {
                 width: 100%;
                 .btn.btn-primary {
                     width: 60px;
                 }
                 .search-icon {
-                    margin-left: 5px;
                     padding: 6px 12px;
+                }
+            }
+        }
+        @media (max-width: ($md - 1)) {
+            min-width: 100%;
+            max-width: 100%;
+            form.simplesearchform {
+                .input-group {
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    .input-group-append {
+                        margin: 0;
+                    }
+                    input, .btn.btn-primary {
+                        width: 100%;
+                        margin: 0 0 .3rem;
+                    }
                 }
             }
         }
@@ -2012,75 +2249,27 @@ table {
     }
 }
 
-.featured-boxes {
-    max-width: 100%;
-    padding: .3rem 0 2rem;
-    overflow: hidden;
-    .row {
-        margin: 0;
-    }
-    .featured-box {
-        height: 100%;
-        padding: 2rem 1rem 1rem;
-        
-        box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        h2 {
-            font-size: 1.6rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-    }
-    &.container {
-        max-width: $xl;
-        .featured-box {
-            padding: 0 1rem;
-            box-shadow: none;
-            h1, h2 {
-                margin-bottom: 1rem;
-            }
-            .lead {
-                color: lighten($font-color, 25%);
-                line-height: 1.5;
-            }
-        }
+.btn-footer-communication {
+    display: none;
+    position: fixed;
+    bottom: 5rem;
+    right: 2rem;
+    @include box-shadow($popover-box-shadow);
+}
+
+.stickyfooter {
+    bottom: -100px;
+    .hasstickyfooter & {
+        bottom: 0;
     }
 }
 
-/**
- * Back to top button.
- */
-.back-to-top {
-    display: none;
-    font-size: ($font-size-base * 1.25);
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: $white;
-    width: 45px;
-    height: 45px;
-    position: fixed;
-    bottom: ($spacer * 6);
-    right: ($spacer * 1.7);
-    border: none;
-    border-radius: 50px;
-    box-shadow: 0 4px 9px rgba(0,0,0,.07);
-    cursor: pointer;
-    border: 1px solid rgba(0,0,0,0.2);
-    background: rgba(255, 255, 255, 0.8);
+.hasstickyfooter .btn-footer-communication {
+    bottom: calc(4rem + #{$stickyfooter-height});
+}
 
-    i {
-        color: $primary;
-        line-height: 42px;
-    }
-
-    &:hover {
-        transition: 0.2s;
-        transform: scale(1.2);
-        background: rgba(255, 255, 255, 1);
-        @include btn-shadow;
-    }
-
-    @media (max-width: ($md - 1)) {
-        display: none !important;
+#questionscontainer {
+    #questionsubmit {
+        margin-bottom: 2rem;
     }
 }
