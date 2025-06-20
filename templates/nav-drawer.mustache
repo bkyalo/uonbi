@@ -22,34 +22,74 @@
     Example context (json): {}
 }}
 <style>
-/* Navigation drawer width */
+/* Navigation drawer */
 #nav-drawer {
-    width: 300px !important; /* Increased from default */
+    width: 260px !important;
+    padding: 15px 0 !important;
+    background: #f8f9fa !important;
+    border-right: 1px solid #e9ecef;
 }
 
-/* Force navigation icons size */
+/* Navigation items */
+#nav-drawer .list-group {
+    padding: 0 10px;
+}
+
+#nav-drawer .list-group-item {
+    border: none;
+    border-radius: 6px !important;
+    margin: 2px 0;
+    padding: 8px 12px !important;
+    transition: all 0.2s ease;
+}
+
+/* Icons */
 #nav-drawer .media-left {
-    width: 2.5rem !important; /* Increased from 2rem */
-    min-width: 2.5rem !important; /* Increased from 2rem */
+    width: 24px !important;
+    min-width: 24px !important;
     text-align: center;
-    margin-right: 1rem !important; /* Increased from 0.75rem */
+    margin-right: 12px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 #nav-drawer .media-left img {
-    width: 2rem !important; /* Increased from 1.5rem */
-    height: 2rem !important; /* Increased from 1.5rem */
-    max-width: 2rem !important; /* Increased from 1.5rem */
-    max-height: 2rem !important; /* Increased from 1.5rem */
-    filter: brightness(0) saturate(100%) invert(58%) sepia(8%) saturate(294%) hue-rotate(169deg) brightness(89%) contrast(89%);
-    opacity: 0.8;
+    width: 18px !important;
+    height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+    filter: brightness(0) saturate(100%) invert(48%) sepia(10%) saturate(3207%) hue-rotate(188deg) brightness(95%) contrast(80%);
+    opacity: 0.9;
     transition: all 0.2s ease;
 }
+
+/* Text */
 #nav-drawer .media-body {
-    font-size: 1rem !important; /* Slightly larger text */
+    font-size: 0.9rem !important;
     font-weight: 500;
+    color: #495057 !important;
     transition: all 0.2s ease;
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* Hover & Active states */
+#nav-drawer .list-group-item:hover,
+#nav-drawer .list-group-item.active {
+    background-color: #e9ecef !important;
+}
+
+#nav-drawer .list-group-item:hover .media-left img,
+#nav-drawer .list-group-item.active .media-left img {
+    opacity: 1 !important;
+    filter: brightness(0) saturate(100%) invert(39%) sepia(57%) saturate(2018%) hue-rotate(202deg) brightness(87%) contrast(101%) !important;
+}
+
+#nav-drawer .list-group-item:hover .media-body,
+#nav-drawer .list-group-item.active .media-body {
+    color: #0d6efd !important;
 }
 #nav-drawer .list-group-item:hover .media-left img,
 #nav-drawer .list-group-item.active .media-left img {
