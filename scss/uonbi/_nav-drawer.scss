@@ -43,40 +43,6 @@
         clear: both;
         li  {
             padding: 0;
-            
-            /* Force icon size in nav drawer */
-            .media-left {
-                width: 2rem !important;
-                min-width: 2rem !important;
-                text-align: center;
-                margin-right: 0.75rem !important;
-                
-                img {
-                    width: 1.5rem !important;
-                    height: 1.5rem !important;
-                    max-width: 1.5rem !important;
-                    max-height: 1.5rem !important;
-                    filter: brightness(0) saturate(100%) invert(58%) sepia(8%) saturate(294%) hue-rotate(169deg) brightness(89%) contrast(89%);
-                    opacity: 0.8;
-                    transition: all 0.2s ease;
-                }
-            }
-            
-            .media-body {
-                font-size: 0.9rem !important;
-                font-weight: 500;
-                transition: all 0.2s ease;
-            }
-            
-            &:hover, &.active {
-                .media-left img {
-                    opacity: 1 !important;
-                    filter: brightness(0) saturate(100%) invert(39%) sepia(57%) saturate(2018%) hue-rotate(202deg) brightness(87%) contrast(101%) !important;
-                }
-                .media-body {
-                    color: $primary !important;
-                }
-            }
             margin: 1px 0;
             background-color: transparent;
             border-radius: $border-radius;
