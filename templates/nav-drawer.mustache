@@ -22,26 +22,34 @@
     Example context (json): {}
 }}
 <style>
+/* Navigation drawer width */
+#nav-drawer {
+    width: 300px !important; /* Increased from default */
+}
+
 /* Force navigation icons size */
 #nav-drawer .media-left {
-    width: 2rem !important;
-    min-width: 2rem !important;
+    width: 2.5rem !important; /* Increased from 2rem */
+    min-width: 2.5rem !important; /* Increased from 2rem */
     text-align: center;
-    margin-right: 0.75rem !important;
+    margin-right: 1rem !important; /* Increased from 0.75rem */
 }
 #nav-drawer .media-left img {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-    max-width: 1.5rem !important;
-    max-height: 1.5rem !important;
+    width: 2rem !important; /* Increased from 1.5rem */
+    height: 2rem !important; /* Increased from 1.5rem */
+    max-width: 2rem !important; /* Increased from 1.5rem */
+    max-height: 2rem !important; /* Increased from 1.5rem */
     filter: brightness(0) saturate(100%) invert(58%) sepia(8%) saturate(294%) hue-rotate(169deg) brightness(89%) contrast(89%);
     opacity: 0.8;
     transition: all 0.2s ease;
 }
 #nav-drawer .media-body {
-    font-size: 0.9rem !important;
+    font-size: 1rem !important; /* Slightly larger text */
     font-weight: 500;
     transition: all 0.2s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #nav-drawer .list-group-item:hover .media-left img,
 #nav-drawer .list-group-item.active .media-left img {
