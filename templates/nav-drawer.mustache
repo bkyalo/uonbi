@@ -21,6 +21,38 @@
 
     Example context (json): {}
 }}
+<style>
+/* Force navigation icons size */
+#nav-drawer .media-left {
+    width: 2rem !important;
+    min-width: 2rem !important;
+    text-align: center;
+    margin-right: 0.75rem !important;
+}
+#nav-drawer .media-left img {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    max-width: 1.5rem !important;
+    max-height: 1.5rem !important;
+    filter: brightness(0) saturate(100%) invert(58%) sepia(8%) saturate(294%) hue-rotate(169deg) brightness(89%) contrast(89%);
+    opacity: 0.8;
+    transition: all 0.2s ease;
+}
+#nav-drawer .media-body {
+    font-size: 0.9rem !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+#nav-drawer .list-group-item:hover .media-left img,
+#nav-drawer .list-group-item.active .media-left img {
+    opacity: 1 !important;
+    filter: brightness(0) saturate(100%) invert(39%) sepia(57%) saturate(2018%) hue-rotate(202deg) brightness(87%) contrast(101%) !important;
+}
+#nav-drawer .list-group-item:hover .media-body,
+#nav-drawer .list-group-item.active .media-body {
+    color: #0f6cbf !important;
+}
+</style>
 <div id="nav-drawer" data-region="drawer" class="hidden-print hidden-mobile moodle-has-zindex {{^navdraweropen}}closed{{/navdraweropen}}" aria-hidden="{{#navdraweropen}}false{{/navdraweropen}}{{^navdraweropen}}true{{/navdraweropen}}" tabindex="-1">
     <a href="{{{ config.wwwroot }}}/?redirect=0" class="navbar-brand drawer {{# logourl }}has-logo{{/ logourl }}
         {{# output.should_display_navbar_logo }}
