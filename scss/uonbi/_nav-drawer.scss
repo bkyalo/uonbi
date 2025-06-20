@@ -47,6 +47,54 @@
             background-color: transparent;
             border-radius: $border-radius;
             border: 0;
+            
+            /* Custom icon styles */
+            .media {
+                align-items: center;
+                padding: 0.5rem 0.75rem;
+                
+                .media-left {
+                    width: 2rem;
+                    text-align: center;
+                    margin-right: 0.75rem;
+                    
+                    img {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        filter: brightness(0) saturate(100%) invert(58%) sepia(8%) saturate(294%) hue-rotate(169deg) brightness(89%) contrast(89%);
+                        opacity: 0.8;
+                        transition: all 0.2s ease;
+                    }
+                }
+                
+                .media-body {
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    transition: all 0.2s ease;
+                }
+                
+                &:hover {
+                    .media-left img {
+                        opacity: 1;
+                        filter: brightness(0) saturate(100%) invert(39%) sepia(57%) saturate(2018%) hue-rotate(202deg) brightness(87%) contrast(101%);
+                    }
+                    .media-body {
+                        color: $primary;
+                    }
+                }
+            }
+            
+            /* Active state */
+            &.active {
+                .media-left img {
+                    opacity: 1;
+                    filter: brightness(0) saturate(100%) invert(39%) sepia(57%) saturate(2018%) hue-rotate(202deg) brightness(87%) contrast(101%);
+                }
+                .media-body {
+                    color: $primary;
+                    font-weight: 600;
+                }
+            }
 
             .nav-link,
             .list-group-item,
@@ -169,8 +217,45 @@
                 }
             }
             > ul {
-                margin-top: 1px;
-                margin-left: $spacer;
+                margin-top: 0.25rem;
+                margin-left: 2.5rem; /* Increased left margin for better indentation */
+                padding-left: 0;
+                
+                /* Style for submenu items */
+                .nav-item {
+                    .media {
+                        padding: 0.4rem 0.75rem;
+                        
+                        .media-left {
+                            width: 1.75rem;
+                            margin-right: 0.5rem;
+                            
+                            img {
+                                width: 1.25rem;
+                                height: 1.25rem;
+                                opacity: 0.7;
+                            }
+                        }
+                        
+                        .media-body {
+                            font-size: 0.85rem;
+                            font-weight: 400;
+                        }
+                        
+                        &:hover {
+                            .media-left img {
+                                opacity: 0.9;
+                            }
+                        }
+                    }
+                    
+                    /* Active state for submenu items */
+                    &.active {
+                        .media-left img {
+                            opacity: 1;
+                        }
+                    }
+                }
 
                 li {
                     .nav-link,
